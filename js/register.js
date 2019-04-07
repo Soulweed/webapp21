@@ -96,8 +96,10 @@ function doRegister(){
 
   jQuery.ajax({
   
+
       url: "https://peahub21.azurewebsites.net/api/v2.0/signup/",
       // url: "https://hookb.in/3OynwLEapdhKeKj2MjmJ",
+
 
       type: "POST",
       headers: {
@@ -145,7 +147,9 @@ function doRegister(){
       //   // }
 
       //   //window.location = "p11searchp.html"
+
        window.location.replace("/login.html")
+
       };
     })
   .fail(function(jqXHR, textStatus, errorThrown) {

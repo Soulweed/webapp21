@@ -13,7 +13,9 @@ function postData(sort, text){
     let search_text = text;
 
     jQuery.ajax({
+
        url: "https://peahub21.azurewebsites.net/api/v2.0/search/",
+
     //    url : "https://hookb.in/ggd1pb80KLsB0B1y81OG", 
        type: "POST",
         headers: {

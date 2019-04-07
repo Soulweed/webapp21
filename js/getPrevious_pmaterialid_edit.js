@@ -1,6 +1,7 @@
 
 var queryString = decodeURIComponent(window.location.search);
 queryString = queryString.substring(1);
+
 var queries = queryString.split("&para");
 var mat_no = queries[0];
 var spec_id = queries[1];
@@ -18,9 +19,12 @@ window.onload= function() {
   //var mat_no = "100002321";
   // var spec_id = 'RE-233444';
   // var mat_desc = '50 kVA, three-phase transformer, permanently sealed and completely oil filled system (without gas cushion) type, withstand short-circuit, 22,000-416/240V, symbol Dyn11.';
+
+
   document.getElementById("spec_id").innerHTML = "SPEC ID&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp: "+spec_id;
   document.getElementById("mat_no").innerHTML = "Material ID: "+mat_no;
   document.getElementById("mat_desc").innerHTML = mat_desc;
+
 
 };
 }
@@ -35,8 +39,10 @@ function postData(material_no,startdateformat,enddateformat){
     //let mat_no = "2222222";
 
     jQuery.ajax({
+
         url: "http://127.0.0.1:8080/api/v2.0/report/",
         //https://hookbin.com/kx6xKbGgjXhepeoxWojw
+
         type: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -161,6 +167,7 @@ function postData(material_no,startdateformat,enddateformat){
         console.log("HTTP Request Failed");
 
     })
+
     .always(function() {
         /* ... */
     });
@@ -174,9 +181,6 @@ function postData(material_no,startdateformat,enddateformat){
 //     .then((data) => {
 //
 // })
-
-
-
 
 
 function Send(){
@@ -219,6 +223,8 @@ function getdateformat(date){
     if(month==month_array[i]) {
         var dateformat = date2_split[3]+"/"+month_string[i]+"/"+date2_split[2];
         return dateformat;
+
                               }
                         }
+
 }

@@ -157,6 +157,7 @@ function convertToBase64() {
             .always(function() {
                 /* ... */
             });
+          
         };
         // Convert data to base64
         fileReader.readAsDataURL(fileToLoad);
@@ -180,8 +181,6 @@ function confirmoffer() {
     return;
   }
 
-
-
 }
 
 function deletePDF() {
@@ -190,4 +189,33 @@ function deletePDF() {
   document.getElementById("offer_result").style.visibility = "hidden";
   document.getElementById('pdfform').reset();
   return;
+}
+
+function offer_next_page() {
+  window.location.href = "c11finalcopy2.html"; //+ queryString
+}
+
+// TODO
+function get_response_offer(data) {
+
+  // collect variable to var before save to localStorage
+  var spec_id = obj['spec_id'];
+  var mat_no = obj['mat_no'];
+  var mat_desc = obj['mat_desc'];
+  var price = obj['price'];
+  var minvalue = obj['min'];
+  var url = obj['url'];
+  var timestamp = obj['date'];
+  // TODO store data to localStorage
+  var theID = document.getElementsByClassName("buttonnext")[0].id;
+  var index = theID.split("_");
+  var i = index[1];
+  var search_result = localStorage.getItem("search_result");
+  var search_result_json = JSON.parse(search_result);
+  var mat_no = search_result_json[i].mat_no;
+  var spec_id = search_result_json[i].spec_id;
+  var mat_desc = search_result_json[i].mat_desc;
+  var url = search_result_json[i].url;
+  var queryString = "?" + spec_id + "&para=" + mat_no + "&para=" + mat_desc + "&para=" + url;
+  console.log(queryString);
 }
