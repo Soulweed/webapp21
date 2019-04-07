@@ -1,5 +1,5 @@
-function next_page(){
-    var theID =  document.getElementsByClassName("buttonnext")[0].id;
+function next_page(obj){
+    var theID =  obj;
     var index = theID.split("_");
     var i = index[1];
     var search_result = localStorage.getItem("search_result");

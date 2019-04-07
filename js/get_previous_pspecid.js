@@ -58,7 +58,7 @@ function postData(sort, text){
             let lable_mat = '<div class=\"label\">';
             let button = '<button type=\"button\"';
             let button_class = 'class=\"buttonnext button:hover\"';
-            let onclick = 'onclick=\"next_page()\">';
+            let onclick = 'onclick=\"next_page(this.id)\">';
             let next = '<div class=\"next\">NEXT</div></botton>' + div_end;
             let id = '';
 
