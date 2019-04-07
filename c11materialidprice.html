@@ -61,10 +61,10 @@
           </div>
           <div class="group">
             <div class="specidrt153112">
-              Spec ID      : RT-1531-1234
+              Spec ID      : <span id="spec_id">RT-1531-1234</span>
             </div>
             <div class="materialid105001">
-              Material ID : 1050010054
+              Material ID :  <span id = "mat_no">1050010054</span>
             </div>
             <div class="allcarsareoperatingwelltherewere1233tripssinceyourlastlogin">
               50 kVA, three-phase transformer, permanently sealed and completely oil filled system (without gas cushion) type, withstand short-circuit, 22,000-416/240V, symbol Dyn11.
@@ -91,7 +91,6 @@
             </div>
           </div>
         </form>
-        <span id="base64result"></span>
         <div class="text">
           <div class="group12">
             <img anima-src="./img/c-1-1-material-id---price-textfield-1.png" class="textfield" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" />
@@ -117,12 +116,15 @@
           <div class="uploader">
             <img anima-src="./img/c-1-1-material-id---price-rectangle-8.png" class="rectangle8" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" />
             <div class="jpgpngorpdfonly">
-              JPG, PNG or PDF only, maximum file size - 5MB
+              <span>PDF only</span>
+              <!-- <span></span> -->
+              <p>maximum file size - 5MB</p>
+              <!-- <p></p> -->
             </div>
             <div class="dragfilesheretou">
-              <span class="span1">Drag files here to upload or
-                <br/>
-              </span>
+              <!-- <span class="span1">Drag files here to upload or
+                <br />
+              </span> -->
               <span class="span2">
               </span>
               <span class="span3"> choose files from your device</span>
@@ -130,9 +132,12 @@
                 <input type="file" accept="application/pdf" name="mat_document" id="mat_document" style="width: 250px;" onchange="convertToBase64();">
                 <!-- <input type="submit" id="submit"> -->
               </form>
+              <span id="fp"></span>
             </div>
+
             <img anima-src="./img/c-1-1-material-id---price-uploadicon.png" class="uploadicon" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" />
           </div>
+
         </div>
       </div>
       <a href="c11searchc.html">

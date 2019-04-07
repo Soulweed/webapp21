@@ -104,72 +104,46 @@
 //     reader.readAsDataURL(file.files[0]);
 //   });
 // });
+var base64updte = "";
+
+
 function convertToBase64() {
-    console.log('inprogress')
-    //Read File
-    var selectedFile = document.getElementById("mat_document").files;
-    //Check File is not Empty
-    if (selectedFile.length > 0) {
-        // Select the very first file from list
-        var fileToLoad = selectedFile[0];
-        // FileReader function for read the file.
-        var fileReader = new FileReader();
-        var base64;
-        // Onload of file read the file content
-        fileReader.onload = function(fileLoadedEvent) {
-            base64 = fileLoadedEvent.target.result;
-            // Print data in console
-            // console.log(base64);
-            var fields = base64.split(',');
-            var base64updte = fields[1];
-            // document.getElementById("base64result").textContent == base64updte;
-            // document.getElementById("visitor").textContent = data.val();
-            // console.log(base64updte);
-            // alert("Document uploaded successfully.");
-            jQuery.ajax({
-              url: "https://peahub21.azurewebsites.net/api/v2.0/offer/",
-              // url: "https://peahub21.azurewebsites.net/api/v2.0/offer/",
-              // url: "http://192.168.43.175:8000/api/ball/testpdf/",
-              type: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
+  console.log('inprogress')
+  //Read File
+  var selectedFile = document.getElementById("mat_document").files;
+  if (selectedFile.length > 0) {
+    // RUN A LOOP TO CHECK EACH SELECTED FILE.
+    for (var i = 0; i <= selectedFile.length - 1; i++) {
 
-              data: JSON.stringify({
+      var fsize = selectedFile.item(i).size; // THE SIZE OF THE FILE.
+      document.getElementById('fp').textContent = fsize/1000 + ' KB';
 
-                "comp_id": "14",
-                "price" : document.getElementById("textPriceUnit").value,
-                "quo_upload_file" : base64updte,
-                "min_vol" : document.getElementById("textVolume").value,
-                "mat_no" : "1050010054"
-              })
-            })
-              .done(function(data, textStatus, jqXHR) {
-                console.log("HTTP Request Succeeded: " + jqXHR.status);
-                console.log(data);
-                alert("Document uploaded successfully.");
-                // deletePDF();
-              })
-            .fail(function(jqXHR, textStatus, errorThrown) {
-                console.log("HTTP Request Failed");
-                alert("Document uploaded failed!!!.");
-            })
-            .always(function() {
-                /* ... */
-            });
-        };
-        // Convert data to base64
-        fileReader.readAsDataURL(fileToLoad);
     }
-    else{
-      alert("Please attach qaotation.")
-    }
+  }
+  //Check File is not Empty
+  if (selectedFile.length > 0) {
+    // Select the very first file from list
+    var fileToLoad = selectedFile[0];
+    // FileReader function for read the file.
+    var fileReader = new FileReader();
+    var base64;
+    // Onload of file read the file content
+    fileReader.onload = function(fileLoadedEvent) {
+      base64 = fileLoadedEvent.target.result;
+      var fields = base64.split(',');
+      base64updte = fields[1];
+    };
+    // Convert data to base64
+    fileReader.readAsDataURL(fileToLoad);
+
+  } else {
+    alert("Please attach qaotation.");
+  }
 }
 
 function confirmoffer() {
-
-  console.log('clickcomplete')
-  convertToBase64()
+  console.log('clickcomplete');
+  // console.log(base64updte);
   if (document.getElementById("textPriceUnit").value == "") {
     alert("Please enter the material unit price.");
     return;
@@ -179,8 +153,43 @@ function confirmoffer() {
     alert("Please enter minimun of material offer value.");
     return;
   }
+  // convertToBase64();
+  console.log(base64updte);
 
+  jQuery.ajax({
+    url: "https://peahub21.azurewebsites.net/api/v2.0/offer/",
+    // url: "https://peahub21.azurewebsites.net/api/v2.0/offer/",
+    // url: "http://192.168.43.175:8000/api/ball/testpdf/",
+    type: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
 
+    data: JSON.stringify({
+
+      "comp_id": "14",
+      "price" : document.getElementById("textPriceUnit").value,
+      "quo_upload_file" : base64updte,
+      "min_vol" : document.getElementById("textVolume").value,
+      "mat_no" : document.getElementById("mat_no").textContent
+    })
+  })
+    .done(function(data, textStatus, jqXHR) {
+      console.log("HTTP Request Succeeded: " + jqXHR.status);
+      console.log(data);
+      alert("Document uploaded successfully.");
+      // deletePDF();
+    })
+  .fail(function(jqXHR, textStatus, errorThrown) {
+      console.log("HTTP Request Failed");
+      alert("Document uploaded failed!!!.");
+  })
+  .always(function() {
+      /* ... */
+  });
+  deletePDF();
+  base64updte = "";
+  document.getElementById('fp').textContent = '';
 
 }
 
