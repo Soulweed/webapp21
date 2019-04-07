@@ -18,19 +18,21 @@ function f_senddata(){
     var search_text = document.getElementById("condition_str").value;
     console.log(search_text.length);
     if (document.getElementById("dropdown").value == "spec_id"){
-        // if (search_text.length == 10){
+
+        if (search_text.length  <= 10){
             
-        // }else {
-        //     alert("โปรดตรวจสอบ การค้นหาต้องมีจำนวน 10 ตัว");
-        //     return;
-        // }
+        }else {
+            alert("โปรดตรวจสอบ การค้นหาต้องมีจำนวน 10 ตัว");
+            return;
+        }
     }else if (document.getElementById("dropdown").value == "mat_no"){
-        if (search_text.length == 10){
+        if (search_text.length <= 10){
             
-        // }else {
-        //     alert("โปรดตรวจสอบ การค้นหาต้องเป็นตัวเลขจำนวน 10 ตัว");
-        //     return;
-        // }
+        }else {
+            alert("โปรดตรวจสอบ การค้นหาต้องเป็นตัวเลขจำนวน 10 ตัว");
+            return;
+        }
+
     }
 
     if (search_text == "" ) {
@@ -43,7 +45,7 @@ function f_senddata(){
         console.log(queryString);
       }
 }
-}
+
    
 
    

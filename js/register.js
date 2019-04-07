@@ -58,11 +58,11 @@ function doRegister(){
   } else
     document.getElementById("textLastname").value.textContent = "";
 
-  if (vender_status == "") {
-    alert("please enter your company name.");
-    return;
-  } else
-    vender_status = "";
+  // if (vender_status == "") {
+  //   alert("please enter your company name.");
+  //   return;
+  // } else
+  //   vender_status = "";
 
   if (document.getElementById("idortax").value == "") {
     alert("please enter your ID card number or Tax number.");
@@ -89,10 +89,17 @@ function doRegister(){
   } else
     document.getElementById("textcompanyaddress").value.textContent = "";
 
+
+    console.log(document.getElementById("exampleFormControlSelect1").value)
+    console.log(document.getElementById("lon").value)
+    console.log(document.getElementById("lat").value)
+
   jQuery.ajax({
   
-    // url: "https://peahub21.azurewebsites.net/api/v2.0/register/",
-      url: "http://127.0.0.1:8000/api/v2.0/signup/",
+
+      url: "https://peahub21.azurewebsites.net/api/v2.0/signup/",
+      // url: "https://hookb.in/3OynwLEapdhKeKj2MjmJ",
+
 
       type: "POST",
       headers: {
@@ -113,10 +120,10 @@ function doRegister(){
         "mobile": document.getElementById("phonenumberinput").value,
         // "egp_id": document.getElementById("egpid").value,
         "address": document.getElementById("textcompanyaddress").value,
-        // "location_lon": document.getElementById("lon").value,
-        // "location_lat": document.getElementById("lat").value,
-        "location_lon": "14.567",
-        "location_lat": "33.567",
+        "location_lon": document.getElementById("lon").value,
+        "location_lat": document.getElementById("lat").value,
+        // "location_lon": "14.567",
+        // "location_lat": "33.567",
         "comp_url" : "-",
         "comp_detail" : "-",
         "comp_tel" : "-",
@@ -140,7 +147,9 @@ function doRegister(){
       //   // }
 
       //   //window.location = "p11searchp.html"
-      window.location.replace("/login.html")
+
+       window.location.replace("/login.html")
+
       };
     })
   .fail(function(jqXHR, textStatus, errorThrown) {

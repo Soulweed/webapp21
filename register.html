@@ -65,7 +65,7 @@
         <a href="homepage.html">
           <div class="logo">
             <div class="peamediumprice">
-              PEAmedium priced
+              Reference price
             </div>
           </div>
         </a>
@@ -97,7 +97,7 @@
     <div class="titleinputpassword">
       <div class="inputfield">
       </div>
-      <input class="textpassword" name="textPassword" id="textPassword" placeholder="Password" />
+      <input class="textpassword" name="textPassword" id="textPassword" placeholder="Password" type="password"/>
       <div class="password">
         PASSWORD
       </div>
@@ -105,7 +105,7 @@
     <div class="titleinputconfirmpassword">
       <div class="inputfield">
       </div>
-      <input class="textconfirmpassword" name="textConfirmPassword" id="textConfirmPassword" placeholder="Confirm password" />
+      <input class="textconfirmpassword" name="textConfirmPassword" id="textConfirmPassword" placeholder="Confirm password" type="password"/>
       <div class="confirmpassword">
         CONFIRM PASSWORD
       </div>
@@ -239,6 +239,7 @@
                     </div> -->
       <div id="lat" type="hidden"></div>
       <div id="lon" type="hidden"></div>
+
       <div id="map" class="map">
         <script type="text/javascript">
           //var map = new ol.Map({
@@ -288,7 +289,7 @@
             console.log('lat:', lat);
 
             // TODO : Edit code for POST data to backend
-            document.getElementById("lon").value = lat;
+            document.getElementById("lat").value = lat;
             document.getElementById('lon').value = lon;
 
 
@@ -310,14 +311,12 @@
             addMarker(lonLat[0], lonLat[1]);
           });
         </script>
-
-
       </div>
       <!-- </div> -->
     </div>
     <div anima-show-on-scroll="" class="buttonlogin anima-animate-enter17">
       <div anima-show-on-scroll="" class="button anima-animate-enter16">
-        <button class="rectangle10" onclick="doRegister()" href="">
+        <button class="rectangle10" onclick="doRegister()">
           <div class="login">
             SIGN UP
           </div>

@@ -1,10 +1,11 @@
 
 var queryString = decodeURIComponent(window.location.search);
 queryString = queryString.substring(1);
-var queries = queryString.split("&");
+
+var queries = queryString.split("&para");
 var mat_no = queries[0];
 var spec_id = queries[1];
-var spec_id = queries[2];
+var mat_desc = queries[2];
 var url = queries[3];
 var startdate_def = new Date();
 startdate_def.setDate(startdate_def.getDate() - 30);
@@ -18,9 +19,12 @@ window.onload= function() {
   //var mat_no = "100002321";
   // var spec_id = 'RE-233444';
   // var mat_desc = '50 kVA, three-phase transformer, permanently sealed and completely oil filled system (without gas cushion) type, withstand short-circuit, 22,000-416/240V, symbol Dyn11.';
-  document.getElementById("sec_ID").innerHTML = "SPEC ID: "+spec_id;
-  document.getElementById("mat_No").innerHTML = "MAT ID: "+mat_no;
-  document.getElementById("depc").innerHTML = mat_desc;
+
+
+  document.getElementById("spec_id").innerHTML = "SPEC ID&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp: "+spec_id;
+  document.getElementById("mat_no").innerHTML = "Material ID: "+mat_no;
+  document.getElementById("mat_desc").innerHTML = mat_desc;
+
 
 };
 }
@@ -35,7 +39,10 @@ function postData(material_no,startdateformat,enddateformat){
     //let mat_no = "2222222";
 
     jQuery.ajax({
-        url: "https://hookb.in/kx6xKbGgjXhepeoxWojw",
+
+        url: "http://127.0.0.1:8080/api/v2.0/report/",
+        //https://hookbin.com/kx6xKbGgjXhepeoxWojw
+
         type: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -52,10 +59,107 @@ function postData(material_no,startdateformat,enddateformat){
         console.log("HTTP Request Succeeded: " + jqXHR.status);
         console.log(data); //Return Data
         if (jqXHR.status == 200) {
-            window.localStorage.setItem('datasearch',JSON.stringify(data));
+           console.log(data)
+           console.log(data['result'])
+            //window.localStorage.setItem('datasearch',JSON.stringify(data));
             //document.getElementById("loader").style.display = "none";
             //window.location = "p11searchp.html"
             //window.location.replace( "/p11searchp.html" )
+            var obj = data['result'];
+            console.log(obj);
+            var comp_name = obj['comp_name'];
+            var price = obj['price'];
+            var min = obj['min'];
+            var date = obj['date'];
+            var comp_tel = obj['comp_tel'];
+            var url = obj['url'];
+
+            var price_min = Math.min(...price);
+            var price_max = Math.max(...price);
+            var price_average = price.reduce((a,b) => a + b, 0) / price.length;
+            document.getElementById("minnimum").innerHTML = price_min;
+            document.getElementById("maximun").innerHTML = price_max;
+            document.getElementById("average").innerHTML = price_average;
+            console.log(price_max);
+            console.log(price_average);
+      //////////////////////////Datatable/////////////////
+            const list = [];
+            //var i;
+            for ( var i= 0; i < price.length; i++) {
+              list[i] = [comp_name[i] , price[i] , min[i] , date[i] , comp_tel[i] ,"<a href=\"./media/"+url[i]+"\"><button class=\"btn btn-primary\">Next</button></a>"];
+            }
+            console.log(list);
+            $(document).ready(function() {
+                $('#example').DataTable({
+                  data: list,
+                    columns: [
+                        { title: "Lender/Name/ID" },
+                        { title: "Price/Unit" },
+                        { title: "Price/Volume" },
+                        { title: "Date" },
+                        { title: "Contact Number" },
+                        { title: "See Detail" }
+                    ]
+                }); ///console.log(text);
+            } );
+
+      /////////////////////Graph//////////////////
+            var fr = [];
+            var x = [], y = [];
+            var length = price.length;
+            var visited = -1;
+
+                for(var i = 0; i < length; i++){
+                    var count = 1;
+                    for(var j = i+1; j < length; j++){
+                        if(price[i] == price[j]){
+                            count++;
+                            //To avoid counting same element again
+                            fr[j] = visited;
+                        }
+                    }
+                    if(fr[i] != visited)
+                        fr[i] = count;
+                }
+                for(var i = 0; i < fr.length; i++){
+                    if(fr[i] != visited)
+                        x[i] = price[i].toString();
+                        y[i] = fr[i]
+                }
+                console.log(x);
+                console.log(y);
+                dataG = {
+                    X:x,
+                    Y:y
+                };
+                return dataG
+                .then((dataG) => {
+                    console.log(dataG);
+                    var ctx = document.getElementById('myChart').getContext('2d');
+                    var myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: dataG.X,
+                            datasets: [{
+                                label: '# PRICE CHART',
+                                data: dataG.Y,
+                                backgroundColor:'rgba(39, 99, 219, 1.0)',
+                                borderColor: 'rgba(39, 99, 132, 1.0)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                    })
+
             console.log("Query")
         };
     })
@@ -64,43 +168,19 @@ function postData(material_no,startdateformat,enddateformat){
 
     })
 
+    .always(function() {
+        /* ... */
+    });
 }
+//////////////////////////////////////////////
 
-
-
+///////////////////////////////////////////////
 //var obj = JSON.parse(txt);
-fetch('https://api.myjson.com/bins/ocl5k')
-    .then((res) => { return res.json() })
-    .then((data) => {
-      var obj = data['result'];
-      console.log(obj);
-      var companyname = obj['comp_name'];
-      var price = obj['price'];
-      var minvalue = obj['min'];
-      var timestamp = obj['date'];
-      var mobile_company = obj['comp_tel'];
-      var uri = obj['url'];
-
-      var price_min = Math.min(...price);
-      var price_max = Math.max(...price);
-      var price_average = price.reduce((a,b) => a + b, 0) / price.length;
-      document.getElementById("minnimum").innerHTML = price_min;
-      document.getElementById("maximun").innerHTML = price_max;
-      document.getElementById("average").innerHTML = price_average;
-      console.log(price_max);
-      console.log(price_average);
-
-var text = "";
-var i;
-
-for ( i= 0; i < price.length; i++) {
-  text += "<tr><td>"+companyname[i] + "</td><td>" + price[i] + "</td><td>" + minvalue[i] + "</td><td>" +  timestamp[i] + "</td><td>" + mobile_company[i]+"</td><td><a href=\".media/"+uri[i]+"\"><button class=\"btn btn-primary\">Next</button></a></td></tr>";
-}
-
-
-document.getElementById("tablebody").innerHTML = text;
-})
-
+// fetch('https://api.myjson.com/bins/6o3ng')
+//     .then((res) => { return res.json() })
+//     .then((data) => {
+//
+// })
 
 
 function Send(){
@@ -143,8 +223,8 @@ function getdateformat(date){
     if(month==month_array[i]) {
         var dateformat = date2_split[3]+"/"+month_string[i]+"/"+date2_split[2];
         return dateformat;
-    }
-}
 
+                              }
+                        }
 
 }
