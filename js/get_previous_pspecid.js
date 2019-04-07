@@ -13,7 +13,9 @@ function postData(sort, text){
     let search_text = text;
 
     jQuery.ajax({
+
        url: "https://peahub21.azurewebsites.net/api/v2.0/search/",
+
     //    url : "https://hookb.in/ggd1pb80KLsB0B1y81OG", 
        type: "POST",
         headers: {
@@ -56,7 +58,7 @@ function postData(sort, text){
             let lable_mat = '<div class=\"label\">';
             let button = '<button type=\"button\"';
             let button_class = 'class=\"buttonnext button:hover\"';
-            let onclick = 'onclick=\"next_page()\">';
+            let onclick = 'onclick=\"next_page(this.id)\">';
             let next = '<div class=\"next\">NEXT</div></botton>' + div_end;
             let id = '';
 

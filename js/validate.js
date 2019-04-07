@@ -18,6 +18,7 @@ function f_senddata(){
     var search_text = document.getElementById("condition_str").value;
     console.log(search_text.length);
     if (document.getElementById("dropdown").value == "spec_id"){
+
         if (search_text.length  <= 10){
             
         }else {
@@ -31,6 +32,7 @@ function f_senddata(){
             alert("โปรดตรวจสอบ การค้นหาต้องเป็นตัวเลขจำนวน 10 ตัว");
             return;
         }
+
     }
 
     if (search_text == "" ) {
@@ -43,7 +45,7 @@ function f_senddata(){
         console.log(queryString);
       }
 }
-g
+
    
 
    

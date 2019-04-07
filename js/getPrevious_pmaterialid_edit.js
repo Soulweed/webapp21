@@ -2,8 +2,8 @@
 var queryString = decodeURIComponent(window.location.search);
 queryString = queryString.substring(1);
 var queries = queryString.split("&para");
-var mat_no = queries[0];
-var spec_id = queries[1];
+var spec_id = queries[0];
+var mat_no = queries[1];
 var mat_desc = queries[2];
 var url = queries[3];
 var startdate_def = new Date();
@@ -11,6 +11,7 @@ startdate_def.setDate(startdate_def.getDate() - 30);
 var enddate_def = new Date();
 var startdateformat = getdateformat(startdate_def);
 var enddateformat = getdateformat(enddate_def);
+postData(mat_no,startdateformat,enddateformat);
 
 window.onload= function() {
             reload();
@@ -18,25 +19,22 @@ window.onload= function() {
   //var mat_no = "100002321";
   // var spec_id = 'RE-233444';
   // var mat_desc = '50 kVA, three-phase transformer, permanently sealed and completely oil filled system (without gas cushion) type, withstand short-circuit, 22,000-416/240V, symbol Dyn11.';
+
+
   document.getElementById("spec_id").innerHTML = "SPEC ID&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp: "+spec_id;
   document.getElementById("mat_no").innerHTML = "Material ID: "+mat_no;
   document.getElementById("mat_desc").innerHTML = mat_desc;
 
+
 };
 }
 
-//var mat_no = "100002321";
-postData(mat_no,startdateformat,enddateformat);
-
-function postData(material_no,startdateformat,enddateformat){
-    // loader
-    //document.getElementById("loader").style.display = "block";
-    //let mat_no = material_no;
-    //let mat_no = "2222222";
-
+function postData(mat_no,startdateformat,enddateformat){
     jQuery.ajax({
-        url: "http://127.0.0.1:8080/api/v2.0/report/",
+        url: "https://peahub21.azurewebsites.net/api/v2.0/report/",
+        // url: "http://127.0.0.1:8080/api/v2.0/report/",
         //https://hookbin.com/kx6xKbGgjXhepeoxWojw
+
         type: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -44,9 +42,9 @@ function postData(material_no,startdateformat,enddateformat){
         contentType: "application/json",
         data: JSON.stringify(
             {
-                mat_no: mat_no ,
-                start_date: startdateformat ,
-                end_date: enddateformat
+                "mat_no": mat_no,
+                "start_date": startdateformat ,
+                "end_date": enddateformat
             })
     })
     .done(function(data, textStatus, jqXHR) {
@@ -54,11 +52,6 @@ function postData(material_no,startdateformat,enddateformat){
         console.log(data); //Return Data
         if (jqXHR.status == 200) {
            console.log(data)
-           console.log(data['result'])
-            //window.localStorage.setItem('datasearch',JSON.stringify(data));
-            //document.getElementById("loader").style.display = "none";
-            //window.location = "p11searchp.html"
-            //window.location.replace( "/p11searchp.html" )
             var obj = data['result'];
             console.log(obj);
             var comp_name = obj['comp_name'];
@@ -74,6 +67,7 @@ function postData(material_no,startdateformat,enddateformat){
             document.getElementById("minnimum").innerHTML = price_min;
             document.getElementById("maximun").innerHTML = price_max;
             document.getElementById("average").innerHTML = price_average;
+            document.getElementById("total_comp").innerHTML = 'TOTAL COMPANIES : ' + price.length;
             console.log(price_max);
             console.log(price_average);
       //////////////////////////Datatable/////////////////
@@ -85,7 +79,9 @@ function postData(material_no,startdateformat,enddateformat){
             console.log(list);
             $(document).ready(function() {
                 $('#example').DataTable({
-                  data: list,
+                    retrieve: true,
+                    paging: false,
+                    data: list,
                     columns: [
                         { title: "Lender/Name/ID" },
                         { title: "Price/Unit" },
@@ -102,6 +98,7 @@ function postData(material_no,startdateformat,enddateformat){
             var x = [], y = [];
             var length = price.length;
             var visited = -1;
+            var y_max = price_max+1;
 
                 for(var i = 0; i < length; i++){
                     var count = 1;
@@ -125,9 +122,8 @@ function postData(material_no,startdateformat,enddateformat){
                 dataG = {
                     X:x,
                     Y:y
-                };
-                return dataG
-                .then((dataG) => {
+                }
+                
                     console.log(dataG);
                     var ctx = document.getElementById('myChart').getContext('2d');
                     var myChart = new Chart(ctx, {
@@ -146,13 +142,13 @@ function postData(material_no,startdateformat,enddateformat){
                             scales: {
                                 yAxes: [{
                                     ticks: {
-                                        beginAtZero: true
+                                        stepSize: 1,
+                                        beginAtZero: true,
                                     }
                                 }]
                             }
                         }
                     });
-                    })
 
             console.log("Query")
         };
@@ -161,6 +157,7 @@ function postData(material_no,startdateformat,enddateformat){
         console.log("HTTP Request Failed");
 
     })
+
     .always(function() {
         /* ... */
     });
@@ -174,9 +171,6 @@ function postData(material_no,startdateformat,enddateformat){
 //     .then((data) => {
 //
 // })
-
-
-
 
 
 function Send(){
@@ -208,10 +202,9 @@ function Send(){
 }
 
 
-
 function getdateformat(date){
-  var date = document.location+'';
-  var date2_split = date.split(' ');
+  var date2 = date.toString();
+  var date2_split = date2.split(' ');
   var month = date2_split[1];
   var month_array = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   var month_string = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
@@ -219,6 +212,7 @@ function getdateformat(date){
     if(month==month_array[i]) {
         var dateformat = date2_split[3]+"/"+month_string[i]+"/"+date2_split[2];
         return dateformat;
-                              }
-                        }
+
+    }
+  }
 }
