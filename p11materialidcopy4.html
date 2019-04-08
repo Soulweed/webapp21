@@ -6,15 +6,19 @@
         <meta charset="utf-8"/>
         <meta content="width=1440, maximum-scale=1.0" name="viewport"/>
         <link href="./css/p11MaterialIdCopy4.css" rel="stylesheet" type="text/css"/>
-		    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
+		    <!-- <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/> -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
         <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
-          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <meta content="Launchpad by Anima" name="author">
         </meta>
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> -->
         <script src="./js/getPrevious_pmaterialid_edit.js"></script>
         <script src="./js/next_page_pmateriallid.js"></script>
-    	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    	  <!-- <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" type="text/javascript"></script> -->
+
         <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
 
         <!--chart--->
@@ -258,21 +262,7 @@
                             </div>
                             <img anima-src="./img/p-1-1-material-id-copy-4-card-base-5.png" class="cardbase" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
                             <div class="cardbase1">
-                              <table id="example" class="display" style="width:100%">
-                                  <thead>
-                                      <tr>
-                                          <th>Lender/Name/ID</th>
-                                          <th>Price/Unit</th>
-                                          <th>Price/Volume</th>
-                                          <th>Date</th>
-                                          <th>Mobile</th>
-                                          <th>See Detail</th>
-                                      </tr>
-                                  </thead>
-                                  <tbody id="tablebody">
-                                  </tbody>
-
-                                </table>
+                              <table id="showresult" class="display" style="width:100%"></table>
                             </div>
                         </div>
                     </div>
@@ -502,7 +492,7 @@
                         <div class="results">NEXT</div>
                     </button>
                 </div>
-                
+
                 <!-- <a href="p11final.html">
                     <div anima-show-on-scroll="" class="buttonnext anima-animate-enter1">
                         <div class="rectangle4">
@@ -694,11 +684,11 @@
             uiLibrary: 'bootstrap4'
         });
 
-        $(document).ready(function() {
-            $('#example').DataTable();
-        } );
 
       </script>
+
+
+
         <!-- End of Scripts -->
     </body>
 </html>
