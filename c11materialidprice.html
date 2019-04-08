@@ -9,6 +9,7 @@
   <meta content="Launchpad by Anima" name="author">
   </meta>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="js/get_previous_cmaterialid.js" charset="utf-8" type="text/javascript"></script>
   <script src="js/cofferprice.js" charset="utf-8" type="text/javascript"></script>
 
 </head>
@@ -61,15 +62,17 @@
           </div>
           <div class="group">
             <div class="specidrt153112">
-              Spec ID      : <span id="spec_id">RT-1531-1234</span>
+
+                <p id="spec_id"></p>
             </div>
             <div class="materialid105001">
-              Material ID :  <span id = "mat_no">1050010054</span>
+                <p id="mat_no"></p>
+            </div>
+            <div class="allcarsareoperatingwelltherewere1233tripssinceyourlastlogin">
+                <p id="mat_desc"></p>
 
             </div>
-            <div id="selected-mat3">
-
-            </div>
+        </div>
             <!-- <div class="specidrt153112">
               Spec ID      : RT-1531-1234
             </div> -->
@@ -79,8 +82,8 @@
             <!-- <div class="allcarsareoperatingwelltherewere1233tripssinceyourlastlogin">
               50 kVA, three-phase transformer, permanently sealed and completely oil filled system (without gas cushion) type, withstand short-circuit, 22,000-416/240V, symbol Dyn11.
             </div> -->
-          </div>
-        </div>
+          <!-- </div>
+        </div> -->
         <div class="rectangle">
         </div>
       </div>
@@ -150,25 +153,22 @@
 
         </div>
       </div>
-      <a href="c11searchc.html">
+      </div>
+      <a href="p11specidp.html">
         <div class="group3copy">
-          <div class="rectangle4">
-          </div>
-          <div class="back">
-            BACK
-          </div>
+            <div class="rectangle4">
+            </div>
+            <div class="back">
+                BACK
+            </div>
         </div>
-      </a>
-      <a>
-        <button anima-show-on-scroll="" class="buttonnext anima-animate-enter" onclick="confirmoffer()">
-          <div class="rectangle4">
-          </div>
-          <div class="next">
-            CONFIRM
-          </div>
+    </a>
+    <div class="buttonnext anima-animate-enter1">
+        <button type="button" class="rectangle4" onclick="confirmoffer()">
+            <div class="results">CONFIRM</div>
         </button>
-      </a>
     </div>
+    <!-- </div> -->
   </div>
   <!-- Scripts -->
   <script>
