@@ -78,27 +78,38 @@ function postData(mat_no,startdateformat,enddateformat){
             console.log(price_max);
             console.log(price_average);
       //////////////////////////Datatable/////////////////
-            const list = [];
-            //var i;
-            for ( var i= 0; i < price.length; i++) {
-              list[i] = [comp_name[i] , price[i] , min[i] , date[i] , comp_tel[i] ,"<a href=\"./media/"+url[i]+"\"><button class=\"btn btn-primary\">Next</button></a>"];
-            }
+            var list = [];
+            // //var i;
+            for ( var j= 0; j < price.length; j++) {
+                list[j] = [comp_name[j] , price[j] , min[j] , date[j] , comp_tel[j], "<a href=\"./media/"+url[j]+"\"><buttom>Next</buttom></a>" ];
+                //list[j] = [comp_name[j]];
+                }
+
+    //         var list = [
+    // [ "Tiger Nixon", "System Architect", "Edinburgh", 5421, "2011/04/25", 320.800 ],
+    // [ "Garrett Winters", "Accountant", "Tokyo", 8422, "2011/07/25", 170.750 ],
+    // [ "Ashton Cox", "Junior Technical Author", "San Francisco", 1562, "2009/01/12", 86.000 ],
+    // [ "Cedric Kelly", "Senior Javascript Developer", "Edinburgh", 6224, "2012/03/29", 433.060 ],
+    // [ "Airi Satou", "Accountant", "Tokyo", 5407, "2008/11/28", 162.700 ],
+    // [ "Brielle Williamson", "Integration Specialist", "New York", 4804, "2012/12/02", 372.000 ]
+    //   ];
             console.log(list);
             $(document).ready(function() {
-                $('#example').DataTable({
-                    retrieve: true,
-                    paging: false,
-                    data: list,
-                    columns: [
-                        { title: "Lender/Name/ID" },
-                        { title: "Price/Unit" },
-                        { title: "Price/Volume" },
-                        { title: "Date" },
-                        { title: "Contact Number" },
-                        { title: "See Detail" }
-                    ]
-                }); ///console.log(text);
+            $('#showresult').DataTable( {
+                data: list,
+                "retrieve": true,
+                "paging": false,
+                "info": false,
+                columns: [
+                    { title: "Company Name" },
+                    { title: "Price/Unit" },
+                    { title: "Price/Volume" },
+                    { title: "Date" },
+                    { title: "Contact Number" },
+                    { title: "More Detail" }
+                ]
             } );
+        } );
 
       /////////////////////Graph//////////////////
             // var fr = [];
@@ -131,6 +142,7 @@ function postData(mat_no,startdateformat,enddateformat){
                 //   console.log(xArr);
                 //   console.log(range);
                 }
+
                 // console.log(i);
                 // console.log(min);
                 x.push(min);
@@ -147,12 +159,16 @@ function postData(mat_no,startdateformat,enddateformat){
             plotdata(x,y);
                 
 
+
             console.log("Query")
 
             };
             
             
         };
+
+
+
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
         console.log("HTTP Request Failed");
