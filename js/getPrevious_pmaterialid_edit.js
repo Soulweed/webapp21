@@ -14,22 +14,17 @@ var enddateformat = getdateformat(enddate_def);
 postData(mat_no,startdateformat,enddateformat);
 
 window.onload= function() {
-            reload();
-  function reload(){
-  //var mat_no = "100002321";
-  // var spec_id = 'RE-233444';
-  // var mat_desc = '50 kVA, three-phase transformer, permanently sealed and completely oil filled system (without gas cushion) type, withstand short-circuit, 22,000-416/240V, symbol Dyn11.';
-
-
-  document.getElementById("spec_id").innerHTML = "SPEC ID&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp: "+spec_id;
-  document.getElementById("mat_no").innerHTML = "Material ID: "+mat_no;
-  document.getElementById("mat_desc").innerHTML = mat_desc;
-
-
-};
+    reload();
+            
+    function reload(){
+    document.getElementById("spec_id").innerHTML = "SPEC ID&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp: "+spec_id;
+    document.getElementById("mat_no").innerHTML = "Material ID: "+mat_no;
+    document.getElementById("mat_desc").innerHTML = mat_desc;
+    };
 }
 
 function postData(mat_no,startdateformat,enddateformat){
+    
     jQuery.ajax({
         url: "https://peahub21.azurewebsites.net/api/v2.0/report/",
         // url: "http://127.0.0.1:8080/api/v2.0/report/",
@@ -60,14 +55,26 @@ function postData(mat_no,startdateformat,enddateformat){
             var date = obj['date'];
             var comp_tel = obj['comp_tel'];
             var url = obj['url'];
-
+            
             var price_min = Math.min(...price);
             var price_max = Math.max(...price);
             var price_average = price.reduce((a,b) => a + b, 0) / price.length;
-            document.getElementById("minnimum").innerHTML = price_min;
-            document.getElementById("maximun").innerHTML = price_max;
-            document.getElementById("average").innerHTML = price_average;
-            document.getElementById("total_comp").innerHTML = 'TOTAL COMPANIES : ' + price.length;
+            if (price.length == 0){
+                
+                document.getElementById("minnimum").innerHTML = 0;
+                document.getElementById("maximun").innerHTML = 0;
+                document.getElementById("average").innerHTML = 0;
+                document.getElementById("total_comp").innerHTML = 'TOTAL COMPANIES : ' + price.length;
+                
+                plotdata([0],[0]);
+
+            }else {  
+
+                document.getElementById("minnimum").innerHTML = price_min;
+                document.getElementById("maximun").innerHTML = price_max;
+                document.getElementById("average").innerHTML = Math.floor(price_average);
+                document.getElementById("total_comp").innerHTML = 'TOTAL COMPANIES : ' + price.length;
+
             console.log(price_max);
             console.log(price_average);
       //////////////////////////Datatable/////////////////
@@ -105,63 +112,59 @@ function postData(mat_no,startdateformat,enddateformat){
         } );
 
       /////////////////////Graph//////////////////
-            var fr = [];
+            // var fr = [];
             var x = [], y = [];
-            var length = price.length;
-            var visited = -1;
-            var y_max = price_max+1;
+    
+            const maxRange = price_max;
+            var min = Number.MAX_VALUE;
+            const dict ={};
+            price.forEach(function(num) {
 
-                for(var i = 0; i < length; i++){
-                    var count = 1;
-                    for(var j = i+1; j < length; j++){
-                        if(price[i] == price[j]){
-                            count++;
-                            //To avoid counting same element again
-                            fr[j] = visited;
-                        }
-                    }
-                    if(fr[i] != visited)
-                        fr[i] = count;
+                min = Math.min(min, num); // find min
+                if (num > maxRange) {
+                    num = maxRange + 1;
                 }
-                for(var i = 0; i < fr.length; i++){
-                    if(fr[i] != visited)
-                        x[i] = price[i].toString();
-                        y[i] = fr[i]
+                dict[num] = dict[num] ? dict[num] + 1 : 1;
+                });
+                
+                console.log("Num | Count");
+                
+                // Print the occurrences per item in array starting from min to max
+                while (min <= maxRange + 1) {
+                if (!dict[min]) { // print only those numbers which are defined in dictionary
+                    min++;
+                    continue;
                 }
-                console.log(x);
-                console.log(y);
-                dataG = {
-                    X:x,
-                    Y:y
+                var xArr = []
+                var range = dict[min];
+                for (i = 0; i < range; i++) {
+                    xArr.push('x');
+                //   console.log(xArr);
+                //   console.log(range);
                 }
 
-                    console.log(dataG);
-                    var ctx = document.getElementById('myChart').getContext('2d');
-                    var myChart = new Chart(ctx, {
-                        type: 'bar',
-                        data: {
-                            labels: dataG.X,
-                            datasets: [{
-                                label: '# PRICE CHART',
-                                data: dataG.Y,
-                                backgroundColor:'rgba(39, 99, 219, 1.0)',
-                                borderColor: 'rgba(39, 99, 132, 1.0)',
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        stepSize: 1,
-                                        beginAtZero: true,
-                                    }
-                                }]
-                            }
-                        }
-                    });
+                // console.log(i);
+                // console.log(min);
+                x.push(min);
+                y.push(i);
+                
+                var disp = (min <= maxRange) ? (min + "   | " + xArr.join("")) : (maxRange + "+  | " + xArr.join(""));
+                // console.log(disp);
+                min = min + 1;
+                
+                }
+            console.log(x);
+            console.log(y);
+            
+            plotdata(x,y);
+                
+
 
             console.log("Query")
+
+            };
+            
+            
         };
 
 
@@ -175,6 +178,42 @@ function postData(mat_no,startdateformat,enddateformat){
     .always(function() {
         /* ... */
     });
+}
+
+function plotdata (x, y){
+
+    dataG = {
+        X:x,
+        Y:y
+    }
+    // ------ // 
+        console.log(dataG);
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: dataG.X,
+                datasets: [{
+                    label: '# PRICE CHART',
+                    data: dataG.Y,
+                    backgroundColor:'rgba(39, 99, 219, 1.0)',
+                    borderColor: 'rgba(39, 99, 132, 1.0)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            stepSize: 1,
+                            beginAtZero: true,
+                        }
+                    }]
+                }
+            }
+        });
+
+
 }
 //////////////////////////////////////////////
 

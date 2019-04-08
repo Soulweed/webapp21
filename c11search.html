@@ -7,29 +7,28 @@
         <link href="./css/p11SearchP.css" rel="stylesheet" type="text/css"/>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="./js/next_page_csearch.js"></script>
         <meta content="Launchpad by Anima" name="author">
         </meta>
     </head>
     <body style="margin: 0;
  background: rgba(249, 250, 251, 1.0);">
- <script>
-     document.getElementById("loader").style.display = "none";
- </script>
- 
         <input id="anPageName" name="page" type="hidden" value="p11searchp"/>
         <div class="p11searchp">
             <div style="width: 1440px; height: 100%; position:relative; margin:auto;">
                 <div class="illgetyouanawes">
                     I'll get you an awesome price in seconds. Ready to go?
                 </div>
-                <div anima-show-on-scroll="" class="buttonnext anima-animate-enter10">
-                    <button type = "button" onclick="f_senddata()" class="rectangle4">
-                            <div id="loader" style="display:none;"></div>
-                    <div class="next" style = "cursor:pointer;" >
+                <!-- <div anima-show-on-scroll="" class="buttonnext anima-animate-enter10">
+                    <div class="rectangle4" type="button" id="submit_btn" onclick="f_senddata()">
+                    </div>
+                    <div class="next">
                         SEARCH
                     </div>
-                   </button>
-                </div>
+                </div> -->
+                <button type="button" class="buttonnext button:hover" id="next_0" onclick="f_senddata()">
+                        <div class="next">SEARCH</div>
+                    </button>
                 <div class="header">
                     <!-- <img anima-src="./img/c-1-1-search---c-dropdown---keyword-rectangle.png" class="rectangle" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/> -->
                     <div class="rightside">
@@ -53,7 +52,7 @@
                             </div>
                             <div class="logo">
                                 <div class="peamediumprice">
-                                    PEAmedium price
+                                    Reference Price
                                 </div>
                             </div>
                         </div>
@@ -61,15 +60,13 @@
                     </div>
                 </div>
                 <div class="group4copy">
-                    <div class="group5copy3">
-                        <!-- <img anima-src="./img/c-1-1-search---c-textfield.png" class="textfield" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/> -->
-                        <input class="textquery" id="condition_str" name="condition_str" placeholder="Type Condition"  onkeypress="f_validate(this);"/ >
-                    </div>
-                    
-                    <div class="search">   
-                            SEARCH      
-                     </div>
-                    </div>
+                        <div class="group5copy3">
+                                <input class="textquery" id="condition_str" name="condition_str" onkeypress="f_validate()" placeholder="Type Condition">
+                            </div>
+                            <div class="search">
+                                SEARCH
+                            </div>
+                </div>
                 <div class="group4">
                     <!-- <a href="p11searchpdropdown.html"> -->
                         <div class="searchby">
@@ -80,8 +77,8 @@
                                         <select name="SelByAttribute" id="dropdown">
                                             <option>-- Select Criteria --</option>
                                             <option value="spec_id">Spec ID</option>
-                                            <option value="mat_id">Material ID</option>
-                                            <option value="keyword">Description</option>
+                                            <option value="mat_no">Material ID</option>
+                                            <option value="mat_desc">Description</option>
                                             
                                         </select>
                                     <!-- <div class="polarisiconminormonoselect">
@@ -266,8 +263,6 @@
             }, 250);
         </script>
         <!-- End of Scripts -->
-        <script src="./js/validate.js"></script>
-        <script src="./js/dosearch.js"></script>
-        <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+
     </body>
 </html>
