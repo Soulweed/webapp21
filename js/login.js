@@ -62,7 +62,7 @@ function doLogin() {
           console.log(data['type'])
           console.log("gggggggg")
           if(data['type']=='PER' || data['type']=='LGE'){
-            window.location.replace("c11searchc.html")
+            window.location.replace("c11search.html")
           }
           else if(data['type'] =='PEA'){
             window.location.replace("p11searchp.html")
