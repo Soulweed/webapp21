@@ -72,9 +72,9 @@ function postData(mat_no,startdateformat,enddateformat){
 
             }else {  
 
-                document.getElementById("minnimum").innerHTML = price_min.toLocaleString();
-                document.getElementById("maximun").innerHTML = price_max.toLocaleString();
-                document.getElementById("average").innerHTML = Math.floor(price_average).toLocaleString();
+                document.getElementById("minnimum").innerHTML = price_min;
+                document.getElementById("maximun").innerHTML = price_max;
+                document.getElementById("average").innerHTML = Math.floor(price_average);
                 document.getElementById("total_comp").innerHTML = 'TOTAL COMPANIES : ' + price.length;
 
             console.log(price_max);
