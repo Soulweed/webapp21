@@ -116,7 +116,7 @@ function convertToBase64() {
     for (var i = 0; i <= selectedFile.length - 1; i++) {
 
       var fsize = selectedFile.item(i).size; // THE SIZE OF THE FILE.
-      document.getElementById('fp').textContent = fsize/1000 + ' KB';
+      document.getElementById('fp').textContent = (fsize/1000).toFixed(2) + ' KB';
 
     }
   }
