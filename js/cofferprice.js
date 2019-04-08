@@ -111,14 +111,33 @@ function convertToBase64() {
   console.log('inprogress')
   //Read File
   var selectedFile = document.getElementById("mat_document").files;
+  console.log(selectedFile);
+  console.log(selectedFile[0]['name'])
   if (selectedFile.length > 0) {
     // RUN A LOOP TO CHECK EACH SELECTED FILE.
     for (var i = 0; i <= selectedFile.length - 1; i++) {
 
       var fsize = selectedFile.item(i).size; // THE SIZE OF THE FILE.
-      document.getElementById('fp').textContent = (fsize/1000).toFixed(2) + ' KB';
-
     }
+    document.getElementById('fp').textContent = (fsize/1000).toFixed(2) + ' KB';
+    var file_size = (fsize/1000000).toFixed(2);
+    // Show in HTML
+    let file_name = selectedFile[0]['name'].split('.')[0];
+    let html_result = '';
+    let grey_table = '<div class=\"resulttable\">';
+    let div_end = '</div>';
+    let pdflogo = '<img class=\"pdflogo\" anima-src="./img/c-1-1-material-id---price-pdfcolor.png" src="./img/c-1-1-material-id---price-pdfcolor.png">';
+    let titlename = '<div class=\"myidpdf\">';
+    let pdftitle = '<div class=\"pdftitle\"> PDF </div>';
+    let sizeUnit = '<div class=\"pdfUnitsize\"> MB </div>';
+    let pdfsize = '<div class=\"pdfsize\">';
+    let uploadedtitle = '<div class=\"uploadedtitle\"> UPLOADED </div>';
+    let deleteButtun = '<img onclick="deletePDF()" anima-src="./img/c-1-1-material-id---price-icdeleteoutline24px@2x.png" class=\"icdeleteoutline24px1\" src="./img/c-1-1-material-id---price-icdeleteoutline24px@2x.png">';
+
+    html_result += grey_table + pdflogo + (titlename + file_name + div_end) + (pdftitle) + (pdfsize + file_size + div_end + sizeUnit) + uploadedtitle + deleteButtun + div_end;
+    // document.getElementById("offer_result").disabled = true;
+    document.getElementById('offer_result').innerHTML = html_result;
+    document.getElementById("offer_result").style.visibility = "visible";
   }
   //Check File is not Empty
   if (selectedFile.length > 0) {
@@ -155,6 +174,8 @@ function confirmoffer() {
   }
   // convertToBase64();
   console.log(base64updte);
+  var mat_no_string = document.getElementById("mat_no").textContent;
+  var mat_no = mat_no_string.split("Material ID: ")[1];
 
   jQuery.ajax({
     url: "https://peahub21.azurewebsites.net/api/v2.0/offer/",
@@ -164,22 +185,24 @@ function confirmoffer() {
     headers: {
       "Content-Type": "application/json",
     },
-
-
-    data: JSON.stringify({
-
-      "comp_id": "14",
-      "price" : document.getElementById("textPriceUnit").value,
-      "quo_upload_file" : base64updte,
-      "min_vol" : document.getElementById("textVolume").value,
-      "mat_no" : document.getElementById("mat_no").textContent
-    })
+    data: JSON.stringify(
+      {
+        "comp_id": "14",
+        "price" : document.getElementById("textPriceUnit").value,
+        "quo_upload_file" : base64updte,
+        "min_vol" : document.getElementById("textVolume").value,
+        "mat_no" : mat_no
+      }
+    )
   })
     .done(function(data, textStatus, jqXHR) {
       console.log("HTTP Request Succeeded: " + jqXHR.status);
       console.log(data);
       alert("Document uploaded successfully.");
-      // deletePDF();
+      deletePDF();
+      base64updte = "";
+      document.getElementById('fp').textContent = '';
+      next_page();
     })
   .fail(function(jqXHR, textStatus, errorThrown) {
       console.log("HTTP Request Failed");
@@ -188,10 +211,6 @@ function confirmoffer() {
   .always(function() {
       /* ... */
   });
-  deletePDF();
-  base64updte = "";
-  document.getElementById('fp').textContent = '';
-
 
 
 }
@@ -201,6 +220,7 @@ function deletePDF() {
   document.getElementById("offer_result").disabled = true;
   document.getElementById("offer_result").style.visibility = "hidden";
   document.getElementById('pdfform').reset();
+  document.getElementById('fp').innerHTML = '';
   return;
 }
 
@@ -232,3 +252,42 @@ function get_response_offer(data) {
   var queryString = "?" + spec_id + "&para=" + mat_no + "&para=" + mat_desc + "&para=" + url;
   console.log(queryString);
 }
+
+function next_page(){
+  var spec_id = document.getElementById("spec_id").textContent;
+  console.log(spec_id);
+  var mat_no = document.getElementById("mat_no").textContent;
+  var mat_desc = document.getElementById("mat_desc").textContent;
+  var unit_price = document.getElementById("textPriceUnit").value;
+  var min_vol = document.getElementById("textVolume").value;
+  var send_date_def = new Date();
+  var send_date = getdateformat(send_date_def);
+  var send_time = gettimeformat(send_date_def)
+
+  var queryString = "?" + spec_id + "&para" + mat_no + "&para" + mat_desc + "&para" + unit_price + "&para" + min_vol + "&para" + send_date + "&para" + send_time;
+  console.log(queryString);
+  window.location.href = "c11finalcopy.html" + queryString;
+}
+
+function getdateformat(date){
+  var date2 = date.toString();
+  var date2_split = date2.split(' ');
+  var month = date2_split[1];
+  var month_array = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  var month_string = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+  for (i in month_array){
+    if(month==month_array[i]) {
+        var dateformat = date2_split[3]+"/"+month_string[i]+"/"+date2_split[2];
+        return dateformat;
+
+    }
+  }
+}
+
+function gettimeformat(date){
+  var date2 = date.toString();
+  var date2_split = date2.split(' ');
+  var time = date2_split[4];
+  return time;
+}
+

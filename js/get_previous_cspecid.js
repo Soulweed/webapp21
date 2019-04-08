@@ -30,6 +30,7 @@ function postData(sort, text){
             })
     })
     
+
     .done(function(data, textStatus, jqXHR) {
         console.log("HTTP Request Succeeded: " + jqXHR.status);
         console.log(data); //Return Data

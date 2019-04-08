@@ -590,7 +590,7 @@ div {
   background-color: rgba(255, 255, 255, 0.0);
   top: 40px;
   height: 30px;
-  width: 551px;
+  width: 500px;
   position: absolute;
   margin: 0;
   left: 17px;
@@ -1693,19 +1693,23 @@ div {
 }
 
 .c11materialidprice .buttonnext .rectangle4 {
-  background-color: rgba(47, 91, 234, 1.0);
-  top: 0px;
-  height: 48px;
-  width: 180px;
-  position: absolute;
-  margin: 0;
-  left: 0px;
-  border-radius: 2px;
-  -ms-transform: rotate(0deg);
-  /* IE 9 */
-  -webkit-transform: rotate(0deg);
-  /* Chrome, Safari, Opera */
-  transform: rotate(0deg);
+  background-color    : rgba(47, 91, 234, 1.0);
+  cursor              : pointer;
+  top                 : 0px;
+  height              : 48px;
+  width               : 180px;
+  position            : absolute;
+  margin              : 0;
+  left                : 0px;
+  border-radius       : 2px;
+  -ms-transform       : rotate(0deg); /* IE 9 */
+  -webkit-transform   : rotate(0deg); /* Chrome, Safari, Opera */
+  transform           : rotate(0deg);
+  font-family         : "ArialRoundedMTBold", Helvetica, Arial, serif;
+  font-size           : 14.0px;
+  color               : rgba(255, 255, 255, 1.0);
+  text-align          : center;
+  line-height         : 16.0px;
 }
 
 .c11materialidprice .buttonnext .next {
