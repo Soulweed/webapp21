@@ -112,7 +112,9 @@ function postData(mat_no,startdateformat,enddateformat){
             var list = [];
             // //var i;
             for ( var j= 0; j < price.length; j++) {
-                list[j] = [comp_name[j] , price[j] , min[j] , date[j] , comp_tel[j], "<a href=\"" +url[j]+ "\"><buttom>Next</buttom></a>" ];
+
+                list[j] = [comp_name[j] , price[j] , min[j] , date[j] , comp_tel[j], "<a href=\""+url[j]+"\"><buttom>Next</buttom></a>" ];
+
                 //list[j] = [comp_name[j]];
                 }
 
