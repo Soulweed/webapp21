@@ -61,6 +61,9 @@ function doLogin() {
       if (jqXHR.status == 200) {
           console.log(data['type'])
           console.log("gggggggg")
+          localStorage.setItem("token", data['token']);
+          localStorage.setItem("comp_id", data['comp_id']);
+          localStorage.setItem("comp_name", data['comp_name']);
           if(data['type']=='PER' || data['type']=='LGE'){
             window.location.replace("c11search.html")
           }

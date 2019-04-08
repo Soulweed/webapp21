@@ -176,6 +176,7 @@ function confirmoffer() {
   console.log(base64updte);
   var mat_no_string = document.getElementById("mat_no").textContent;
   var mat_no = mat_no_string.split("Material ID: ")[1];
+  console.log(localStorage.getItem("comp_id"));
 
   jQuery.ajax({
     url: "https://peahub21.azurewebsites.net/api/v2.0/offer/",
@@ -187,7 +188,7 @@ function confirmoffer() {
     },
     data: JSON.stringify(
       {
-        "comp_id": "14",
+        "comp_id": localStorage.getItem("comp_id"),
         "price" : document.getElementById("textPriceUnit").value,
         "quo_upload_file" : base64updte,
         "min_vol" : document.getElementById("textVolume").value,
