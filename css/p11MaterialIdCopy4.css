@@ -1290,7 +1290,9 @@ div {
 }
 .p11materialidcopy4 .cardmetricsmall .baht1 {
   background-color    : rgba(255,255,255,0.0);
-  top                 : 88px;
+
+  top                 : 87px;
+
   height              : auto;
   width               : auto;
   position            : absolute;
