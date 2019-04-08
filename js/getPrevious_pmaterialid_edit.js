@@ -15,7 +15,7 @@ postData(mat_no,startdateformat,enddateformat);
 
 window.onload= function() {
     reload();
-            
+
     function reload(){
     document.getElementById("spec_id").innerHTML = "SPEC ID&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp: "+spec_id;
     document.getElementById("mat_no").innerHTML = "Material ID: "+mat_no;
@@ -24,7 +24,7 @@ window.onload= function() {
 }
 
 function postData(mat_no,startdateformat,enddateformat){
-    
+
     jQuery.ajax({
         url: "https://peahub21.azurewebsites.net/api/v2.0/report/",
         // url: "http://127.0.0.1:8080/api/v2.0/report/",
@@ -55,24 +55,53 @@ function postData(mat_no,startdateformat,enddateformat){
             var date = obj['date'];
             var comp_tel = obj['comp_tel'];
             var url = obj['url'];
-            
+
             var price_min = Math.min(...price);
             var price_max = Math.max(...price);
             var price_average = price.reduce((a,b) => a + b, 0) / price.length;
             if (price.length == 0){
-                
+
                 document.getElementById("minnimum").innerHTML = 0;
                 document.getElementById("maximun").innerHTML = 0;
                 document.getElementById("average").innerHTML = 0;
                 document.getElementById("total_comp").innerHTML = 'TOTAL COMPANIES : ' + price.length;
-                
+
                 plotdata([0],[0]);
 
-            }else {  
+            }else {
 
-                document.getElementById("minnimum").innerHTML = price_min;
-                document.getElementById("maximun").innerHTML = price_max;
-                document.getElementById("average").innerHTML = Math.floor(price_average);
+                if (price_min>=1000000){
+                  val_price_min = (price_min/1000000).toFixed(2) + 'M';
+                }
+                else if (price_min>=1000) {
+                  val_price_min = (price_min/1000).toFixed(2) + 'K';
+                }
+                else {
+                  val_price_min = price_min;
+                }
+
+                if (price_max>=1000000){
+                  val_price_max = (price_max/1000000).toFixed(2) + 'M';
+                }
+                else if (price_max>=1000) {
+                  val_price_max = (price_max/1000).toFixed(2) + 'K';
+                }
+                else {
+                  val_price_max = price_max;
+                }
+
+                if (Math.floor(price_average)>=1000000){
+                  val_price_avg = (Math.floor(price_average)/1000000).toFixed(2) + 'M';
+                }
+                else if (Math.floor(price_average)>=1000) {
+                  val_price_avg = (Math.floor(price_average)/1000).toFixed(2) + 'K';
+                }
+                else {
+                  val_price_avg = Math.floor(price_average);
+                }
+                document.getElementById("minnimum").innerHTML = val_price_min;
+                document.getElementById("maximun").innerHTML = val_price_max;
+                document.getElementById("average").innerHTML = val_price_avg;
                 document.getElementById("total_comp").innerHTML = 'TOTAL COMPANIES : ' + price.length;
 
             console.log(price_max);
@@ -114,7 +143,7 @@ function postData(mat_no,startdateformat,enddateformat){
       /////////////////////Graph//////////////////
             // var fr = [];
             var x = [], y = [];
-    
+
             const maxRange = price_max;
             var min = Number.MAX_VALUE;
             const dict ={};
@@ -126,9 +155,9 @@ function postData(mat_no,startdateformat,enddateformat){
                 }
                 dict[num] = dict[num] ? dict[num] + 1 : 1;
                 });
-                
+
                 console.log("Num | Count");
-                
+
                 // Print the occurrences per item in array starting from min to max
                 while (min <= maxRange + 1) {
                 if (!dict[min]) { // print only those numbers which are defined in dictionary
@@ -147,24 +176,24 @@ function postData(mat_no,startdateformat,enddateformat){
                 // console.log(min);
                 x.push(min);
                 y.push(i);
-                
+
                 var disp = (min <= maxRange) ? (min + "   | " + xArr.join("")) : (maxRange + "+  | " + xArr.join(""));
                 // console.log(disp);
                 min = min + 1;
-                
+
                 }
             console.log(x);
             console.log(y);
-            
+
             plotdata(x,y);
-                
+
 
 
             console.log("Query")
 
             };
-            
-            
+
+
         };
 
 
@@ -186,7 +215,7 @@ function plotdata (x, y){
         X:x,
         Y:y
     }
-    // ------ // 
+    // ------ //
         console.log(dataG);
         var ctx = document.getElementById('myChart').getContext('2d');
         var myChart = new Chart(ctx, {

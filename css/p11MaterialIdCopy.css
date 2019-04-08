@@ -4,7 +4,7 @@
                           font-family: "ArialRoundedMTBold";
                           src: url('../fonts/Arial Rounded Bold.ttf') format("truetype");
                         }
-                        
+
 .p11materialidcopy {
   width               : 100%;
   min-width           : 1440px;
@@ -1213,7 +1213,7 @@ div {
 }
 .p11materialidcopy .cardmetricsmall .baht1 {
   background-color    : rgba(255,255,255,0.0);
-  top                 : 88px;
+  top                 : 67px;
   height              : auto;
   width               : auto;
   position            : absolute;
@@ -1712,7 +1712,7 @@ div {
   line-height         : 22.0px;
 }
 .p11materialidcopy .moduledriverlistsmall .componentcontentrowdriver .rightcontainer .a6432 .span1 {
-  
+
 }
 .p11materialidcopy .moduledriverlistsmall .componentcontentrowdriver .rightcontainer .a6432 .span2 {
   font-family         : "Rubik", Helvetica, Arial, serif;
@@ -1909,7 +1909,7 @@ div {
   line-height         : 22.0px;
 }
 .p11materialidcopy .moduledriverlistsmall .componentcontentrowdriver1 .rightcontainer .a6432 .span1 {
-  
+
 }
 .p11materialidcopy .moduledriverlistsmall .componentcontentrowdriver1 .rightcontainer .a6432 .span2 {
   font-family         : "Rubik", Helvetica, Arial, serif;
@@ -2106,7 +2106,7 @@ div {
   line-height         : 22.0px;
 }
 .p11materialidcopy .moduledriverlistsmall .componentcontentrowdriver2 .rightcontainer .a6432 .span1 {
-  
+
 }
 .p11materialidcopy .moduledriverlistsmall .componentcontentrowdriver2 .rightcontainer .a6432 .span2 {
   font-family         : "Rubik", Helvetica, Arial, serif;
@@ -4266,56 +4266,56 @@ div {
 }
 @-webkit-keyframes anima-reveal {
   0%
-   
+
   {
       opacity: 0;
     }
-  
-    
+
+
   100%
-   
+
   {
       opacity: 1;
     }
 }
 @-moz-keyframes anima-reveal {
   0%
-   
+
   {
       opacity: 0;
     }
-  
-    
+
+
   100%
-   
+
   {
       opacity: 1;
     }
 }
 @-o-keyframes anima-reveal {
   0%
-   
+
   {
       opacity: 0;
     }
-  
-    
+
+
   100%
-   
+
   {
       opacity: 1;
     }
 }
 @keyframes anima-reveal {
   0%
-   
+
   {
       opacity: 0;
     }
-  
-    
+
+
   100%
-   
+
   {
       opacity: 1;
     }
