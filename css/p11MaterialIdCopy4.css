@@ -1272,7 +1272,7 @@ div {
   background-color    : rgba(255,255,255,0.0);
   top                 : 0px;
   height              : auto;
-  width               : auto;
+  width               : 130px;
   position            : absolute;
   margin              : 0;
   left                : 0px;
@@ -1282,7 +1282,8 @@ div {
   font-family         : "Rubik", Helvetica, Arial, serif;
   font-weight         : 300;
   font-style          : normal;
-  font-size           : 48.0px;
+  font-size           : 25.0px;
+  /* font-size           : 1.8vw; */
   color               : rgba(126, 210, 33, 1.0);
   text-align          : left;
   letter-spacing      : -0.6px;
@@ -1290,12 +1291,12 @@ div {
 }
 .p11materialidcopy4 .cardmetricsmall .baht1 {
   background-color    : rgba(255,255,255,0.0);
-  top                 : 110px;
+  top                 : 85px;
   height              : auto;
   width               : auto;
   position            : absolute;
   margin              : 0;
-  left                : 132px;
+  left                : 160px;
   -ms-transform       : rotate(0deg); /* IE 9 */
   -webkit-transform   : rotate(0deg); /* Chrome, Safari, Opera */
   transform           : rotate(0deg);
@@ -1409,7 +1410,7 @@ div {
   background-color    : rgba(255,255,255,0.0);
   top                 : 0px;
   height              : auto;
-  width               : auto;
+  width               : 130px;
   position            : absolute;
   margin              : 0;
   left                : 0px;
@@ -1419,7 +1420,8 @@ div {
   font-family         : "Rubik", Helvetica, Arial, serif;
   font-weight         : 300;
   font-style          : normal;
-  font-size           : 48.0px;
+  font-size           : 25.0px;
+  /* font-size           : 1.8vw;  */
   color               : rgba(47, 91, 234, 1.0);
   text-align          : left;
   letter-spacing      : -0.6px;
@@ -1427,19 +1429,19 @@ div {
 }
 .p11materialidcopy4 .cardmetricsmall1 .baht1 {
   background-color    : rgba(255,255,255,0.0);
-  top                 : 88px;
+  top                 : 85px;
   height              : auto;
   width               : auto;
   position            : absolute;
   margin              : 0;
-  left                : 132px;
+  left                : 160px;
   -ms-transform       : rotate(0deg); /* IE 9 */
   -webkit-transform   : rotate(0deg); /* Chrome, Safari, Opera */
   transform           : rotate(0deg);
   font-family         : "Rubik", Helvetica, Arial, serif;
   font-weight         : 300;
   font-style          : normal;
-  font-size           : 21.0px;
+  font-size           : 18.0px;
   color               : rgba(46, 56, 77, 1.0);
   text-align          : left;
   line-height         : 32.0px;
@@ -1546,7 +1548,7 @@ div {
   background-color    : rgba(255,255,255,0.0);
   top                 : 0px;
   height              : auto;
-  width               : auto;
+  width               : 130px;
   position            : absolute;
   margin              : 0;
   left                : 0px;
@@ -1556,7 +1558,8 @@ div {
   font-family         : "Rubik", Helvetica, Arial, serif;
   font-weight         : 300;
   font-style          : normal;
-  font-size           : 48.0px;
+  font-size           : 25.0px;
+  /* font-size           : 1.8vw;  */
   color               : rgba(254, 120, 101, 1.0);
   text-align          : left;
   letter-spacing      : -0.6px;
@@ -1564,19 +1567,19 @@ div {
 }
 .p11materialidcopy4 .cardmetricsmall2 .baht1 {
   background-color    : rgba(255,255,255,0.0);
-  top                 : 88px;
+  top                 : 85px;
   height              : auto;
   width               : auto;
   position            : absolute;
   margin              : 0;
-  left                : 132px;
+  left                : 160px;
   -ms-transform       : rotate(0deg); /* IE 9 */
   -webkit-transform   : rotate(0deg); /* Chrome, Safari, Opera */
   transform           : rotate(0deg);
   font-family         : "Rubik", Helvetica, Arial, serif;
   font-weight         : 300;
   font-style          : normal;
-  font-size           : 21.0px;
+  font-size           : 18.0px;
   color               : rgba(46, 56, 77, 1.0);
   text-align          : left;
   line-height         : 32.0px;
@@ -5271,7 +5274,7 @@ div {
 }
 .p11materialidcopy4 .group3copy {
   background-color    : rgba(255,255,255,0.0);
-  top                 : 1084px;
+  top                 : 1300px;
   height              : 48px;
   width               : 180px;
   position            : absolute;
@@ -5313,7 +5316,7 @@ div {
 }
 .p11materialidcopy4 .buttonnext {
   background-color    : rgba(255,255,255,0.0);
-  top                 : 1084px;
+  top                 : 1300px;
   height              : 48px;
   width               : 180px;
   position            : absolute;

@@ -20,6 +20,8 @@ window.onload= function() {
     document.getElementById("spec_id").innerHTML = "SPEC ID&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp: "+spec_id;
     document.getElementById("mat_no").innerHTML = "Material ID: "+mat_no;
     document.getElementById("mat_desc").innerHTML = mat_desc;
+    document.getElementById("datepickerstart").value = getdateformat_input(startdate_def);
+    document.getElementById("datepickerend").value = getdateformat_input(enddate_def);
     };
 }
 
@@ -70,9 +72,9 @@ function postData(mat_no,startdateformat,enddateformat){
 
             }else {  
 
-                document.getElementById("minnimum").innerHTML = price_min;
-                document.getElementById("maximun").innerHTML = price_max;
-                document.getElementById("average").innerHTML = Math.floor(price_average);
+                document.getElementById("minnimum").innerHTML = price_min.toLocaleString();
+                document.getElementById("maximun").innerHTML = price_max.toLocaleString();
+                document.getElementById("average").innerHTML = Math.floor(price_average).toLocaleString();
                 document.getElementById("total_comp").innerHTML = 'TOTAL COMPANIES : ' + price.length;
 
             console.log(price_max);
@@ -81,7 +83,7 @@ function postData(mat_no,startdateformat,enddateformat){
             var list = [];
             // //var i;
             for ( var j= 0; j < price.length; j++) {
-                list[j] = [comp_name[j] , price[j] , min[j] , date[j] , comp_tel[j], "<a href=\"./media/"+url[j]+"\"><buttom>Next</buttom></a>" ];
+                list[j] = [comp_name[j] , price[j] , min[j] , date[j] , comp_tel[j], "<a href=\"" +url[j]+ "\"><buttom>Next</buttom></a>" ];
                 //list[j] = [comp_name[j]];
                 }
 
@@ -269,3 +271,18 @@ function getdateformat(date){
     }
   }
 }
+
+function getdateformat_input(date){
+    var date2 = date.toString();
+    var date2_split = date2.split(' ');
+    var month = date2_split[1];
+    var month_array = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    var month_string = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+    for (i in month_array){
+      if(month==month_array[i]) {
+          var dateformat = date2_split[2]+"/"+month_string[i]+"/"+date2_split[3];
+          return dateformat;
+  
+      }
+    }
+  }
