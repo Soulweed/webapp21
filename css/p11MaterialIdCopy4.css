@@ -1272,7 +1272,7 @@ div {
   background-color    : rgba(255,255,255,0.0);
   top                 : 0px;
   height              : auto;
-  width               : 130px;
+  width               : auto;
   position            : absolute;
   margin              : 0;
   left                : 0px;
@@ -1282,8 +1282,7 @@ div {
   font-family         : "Rubik", Helvetica, Arial, serif;
   font-weight         : 300;
   font-style          : normal;
-  font-size           : 25.0px;
-  /* font-size           : 1.8vw; */
+  font-size           : 48.0px;
   color               : rgba(126, 210, 33, 1.0);
   text-align          : left;
   letter-spacing      : -0.6px;
