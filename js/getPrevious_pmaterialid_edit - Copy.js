@@ -35,14 +35,15 @@ function postData(mat_no,startdateformat,enddateformat){
         type: "POST",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": token,
+             "Authorization": token,
         },
         contentType: "application/json",
         data: JSON.stringify(
             {
+
                 "mat_no": mat_no,
                 "start_date": startdateformat ,
-                "end_date": enddateformat,
+                "end_date": enddateformat
             })
     })
     .done(function(data, textStatus, jqXHR) {
@@ -110,35 +111,15 @@ function postData(mat_no,startdateformat,enddateformat){
             console.log(price_max);
             console.log(price_average);
       //////////////////////////Datatable/////////////////
-            var t_body = $('#showresult').DataTable({
-              "retrieve": true,
-              "info": false,
-              columns: [
-                  { title: "Company Name" },
-                  { title: "Price/Unit" },
-                  { title: "Price/Volume" },
-                  { title: "Date" },
-                  { title: "Contact Number" },
-                  { title: "More Detail" }
-              ]
-            });
-            t_body
-                .clear()
-                .draw();
             var list = [];
             // //var i;
+
             for ( var j= 0; j < price.length; j++) {
-              var date2_split = date[j].split("/");
-              var dateformat = date2_split[2]+"/"+date2_split[1]+"/"+date2_split[0];
-                list[j] = [comp_name[j] , price[j] , min[j] , dateformat , comp_tel[j], "<a href=\"" +url[j]+ "\"><buttom>Next</buttom></a>" ];
-                t_body.row.add( [
-                    comp_name[j],
-                    price[j],
-                    min[j],
-                    dateformat,
-                    comp_tel[j],
-                    "<a href=\"" +url[j]+ "\"><buttom type=\"button\" class=\"btn btn-primary\">Next</buttom></a>"
-                ] ).draw( false );
+                // var date2 = date[j].toString();
+                 var date2_split = date[j].split("/");
+                 var dateformat = date2_split[2]+"/"+date2_split[1]+"/"+date2_split[0];
+                 list[j] = [comp_name[j] , price[j] , min[j] , dateformat , comp_tel[j], "<a href=\"" +url[j]+ "\"><buttom type=\"button\" class=\"btn btn-primary\">Next</buttom></a>" ];
+
                 //list[j] = [comp_name[j]];
                 }
 
@@ -151,23 +132,25 @@ function postData(mat_no,startdateformat,enddateformat){
     // [ "Brielle Williamson", "Integration Specialist", "New York", 4804, "2012/12/02", 372.000 ]
     //   ];
             console.log(list);
-            // $(document).ready(function() {
-            // $('#showresult').DataTable( {
-            //     data: list,
-            //     "retrieve": true,
-            //     "paging": false,
-            //     "info": false,
-            //     columns: [
-            //         { title: "Company Name" },
-            //         { title: "Price/Unit" },
-            //         { title: "Price/Volume" },
-            //         { title: "Date" },
-            //         { title: "Contact Number" },
-            //         { title: "More Detail" }
-            //     ]
-            // } );
 
-        // } );
+            $(document).ready(function() {
+               $('#showresult').DataTable( {
+                    data: list,
+                    "retrieve": true,
+                    "info": false,
+                    columns: [
+                        { title: "Company Name" },
+                        { title: "Price/Unit" },
+                        { title: "Price/Volume" },
+                        { title: "Date" },
+                        { title: "Contact Number" },
+                        { title: "More Detail" }
+                    ]
+            });
+            $('#showresult').DataTable(data).ajax.reload();
+         });
+
+
 
 
       /////////////////////Graph//////////////////
@@ -238,7 +221,9 @@ function postData(mat_no,startdateformat,enddateformat){
         /* ... */
     });
 }
-var myChart;
+
+////////////end///////////
+
 function plotdata (x, y){
 
     dataG = {
@@ -248,8 +233,7 @@ function plotdata (x, y){
     // ------ //
         console.log(dataG);
         var ctx = document.getElementById('myChart').getContext('2d');
-
-        myChart = new Chart(ctx, {
+        var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
                 labels: dataG.X,
@@ -272,7 +256,6 @@ function plotdata (x, y){
                 }
             }
         });
-
 
 }
 //////////////////////////////////////////////
@@ -311,8 +294,11 @@ function Send(){
        }
    }
    console.log(dateend_output);
-   myChart.destroy();
    postData(mat_no,date_output,dateend_output);
+   // $('#showresult').DataTable().clear();
+
+   // $('#showresult').DataTable().ajax.reload(null, false);
+
 }
 
 

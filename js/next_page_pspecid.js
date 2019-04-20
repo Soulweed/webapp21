@@ -13,4 +13,3 @@ function next_page(obj){
     console.log(queryString);
     window.location.href = "p11MaterialIdCopy4.html" + queryString;
 }
-

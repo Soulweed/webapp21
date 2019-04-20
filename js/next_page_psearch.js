@@ -26,7 +26,7 @@ function f_senddata(){
         return;
     } else {
         var queryString = "?" + search_by + "&para" + search_text;
-        window.location.href = "c11specid.html" + queryString;
+        window.location.href = "p11specidp.html" + queryString;
         console.log(queryString);
       }
 }

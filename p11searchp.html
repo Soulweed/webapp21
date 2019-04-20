@@ -7,7 +7,7 @@
         <link href="./css/p11SearchP.css" rel="stylesheet" type="text/css"/>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="./js/next_page_csearch.js"></script>
+        <script src="./js/next_page_psearch.js"></script>
         <!-- <script src="./js/validate.js"></script> -->
         <meta content="Launchpad by Anima" name="author">
         </meta>
@@ -73,14 +73,14 @@
                         <div class="searchby">
                             <div class="group5copy3">
                                 <div class="select_join" type="select">
-                                        
+
                                     <!-- <img type="select" anima-src="./img/c-1-1-search---c-textfield-1.png" class="textfield" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/> -->
                                         <select name="SelByAttribute" id="dropdown">
                                             <option>-- Select Criteria --</option>
                                             <option value="spec_id">Spec ID</option>
                                             <option value="mat_no">Material ID</option>
                                             <option value="mat_desc">Description</option>
-                                            
+
                                         </select>
                                     <!-- <div class="polarisiconminormonoselect">
                                         <img anima-src="./img/c-1-1-search---c-dropdown---material-id-polaris-iconminormonoselect@2x.png" class="polarisiconminormonoselect1" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
@@ -272,7 +272,7 @@
                     type: "POST",
                     headers: {
                         "Content-Type": "application/json",
-                        
+
                     },
                     contentType: "application/json",
                     data: JSON.stringify({
@@ -291,7 +291,7 @@
                 })
                 .fail(function(jqXHR, textStatus, errorThrown) {
                     console.log("HTTP Request Failed");
-                    
+
                 })
                 .always(function() {
                     /* ... */
