@@ -109,12 +109,35 @@ function postData(mat_no,startdateformat,enddateformat){
             console.log(price_max);
             console.log(price_average);
       //////////////////////////Datatable/////////////////
+            var t_body = $('#showresult').DataTable({
+              "retrieve": true,
+              "paging": false,
+              "info": false,
+              columns: [
+                  { title: "Company Name" },
+                  { title: "Price/Unit" },
+                  { title: "Price/Volume" },
+                  { title: "Date" },
+                  { title: "Contact Number" },
+                  { title: "More Detail" }
+              ]
+            });
+            t_body
+                .clear()
+                .draw();
             var list = [];
             // //var i;
             for ( var j= 0; j < price.length; j++) {
 
                 list[j] = [comp_name[j] , price[j] , min[j] , date[j] , comp_tel[j], "<a href=\"" +url[j]+ "\"><buttom>Next</buttom></a>" ];
-
+                t_body.row.add( [
+                    comp_name[j],
+                    price[j],
+                    min[j],
+                    date[j],
+                    comp_tel[j],
+                    "<a href=\"" +url[j]+ "\"><buttom>Next</buttom></a>"
+                ] ).draw( false );
                 //list[j] = [comp_name[j]];
                 }
 
@@ -127,22 +150,24 @@ function postData(mat_no,startdateformat,enddateformat){
     // [ "Brielle Williamson", "Integration Specialist", "New York", 4804, "2012/12/02", 372.000 ]
     //   ];
             console.log(list);
-            $(document).ready(function() {
-            $('#showresult').DataTable( {
-                data: list,
-                "retrieve": true,
-                "paging": false,
-                "info": false,
-                columns: [
-                    { title: "Company Name" },
-                    { title: "Price/Unit" },
-                    { title: "Price/Volume" },
-                    { title: "Date" },
-                    { title: "Contact Number" },
-                    { title: "More Detail" }
-                ]
-            } );
-        } );
+            // $(document).ready(function() {
+            // $('#showresult').DataTable( {
+            //     data: list,
+            //     "retrieve": true,
+            //     "paging": false,
+            //     "info": false,
+            //     columns: [
+            //         { title: "Company Name" },
+            //         { title: "Price/Unit" },
+            //         { title: "Price/Volume" },
+            //         { title: "Date" },
+            //         { title: "Contact Number" },
+            //         { title: "More Detail" }
+            //     ]
+            // } );
+
+        // } );
+
 
       /////////////////////Graph//////////////////
             // var fr = [];
