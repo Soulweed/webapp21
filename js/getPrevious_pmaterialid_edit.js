@@ -212,7 +212,7 @@ function postData(mat_no,startdateformat,enddateformat){
         /* ... */
     });
 }
-
+var myChart;
 function plotdata (x, y){
 
     dataG = {
@@ -222,7 +222,8 @@ function plotdata (x, y){
     // ------ //
         console.log(dataG);
         var ctx = document.getElementById('myChart').getContext('2d');
-        var myChart = new Chart(ctx, {
+
+        myChart = new Chart(ctx, {
             type: 'bar',
             data: {
                 labels: dataG.X,
@@ -284,6 +285,7 @@ function Send(){
        }
    }
    console.log(dateend_output);
+   myChart.destroy();
    postData(mat_no,date_output,dateend_output);
 }
 
@@ -313,7 +315,7 @@ function getdateformat_input(date){
       if(month==month_array[i]) {
           var dateformat = date2_split[2]+"/"+month_string[i]+"/"+date2_split[3];
           return dateformat;
-  
+
       }
     }
   }
