@@ -41,7 +41,8 @@ function postData(mat_no,startdateformat,enddateformat){
             {
                 "mat_no": mat_no,
                 "start_date": startdateformat ,
-                "end_date": enddateformat
+                "end_date": enddateformat,
+                "token": localStorage.getItem("token")
             })
     })
     .done(function(data, textStatus, jqXHR) {

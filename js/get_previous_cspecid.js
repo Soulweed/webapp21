@@ -26,11 +26,11 @@ function postData(sort, text){
         data: JSON.stringify(
             {
                 "search_by": search_by,
-                "search_text": search_text
+                "search_text": search_text,
+                "token": localStorage.getItem("token")
             })
     })
     
-
     .done(function(data, textStatus, jqXHR) {
         console.log("HTTP Request Succeeded: " + jqXHR.status);
         console.log(data); //Return Data

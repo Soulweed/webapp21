@@ -1,31 +1,22 @@
 function f_validate(val){ // เช็คตัวเลข
-    if (document.getElementById("dropdown").value == "mat_id"){
-        if (event.keyCode < 45 || event.keyCode > 57) {
+
+    if (document.getElementById("dropdown").value == "mat_no")
+    {   
+        if (val.keyCode < 45 || val.keyCode > 57) {
             alert("กรุณาป้อนตัวเลขค่ะ");
-            event.returnValue = false;
-            val.focus();
-            }
-
-    } else{
-
-            val.focus();
+            val.returnValue = false;   
+            }   
+    } else {
     }
-       
+          
 }
 
 function f_senddata(){
     var search_by = document.getElementById("dropdown").value;
     var search_text = document.getElementById("condition_str").value;
     console.log(search_text.length);
-    if (document.getElementById("dropdown").value == "spec_id"){
 
-        if (search_text.length  <= 10){
-            
-        }else {
-            alert("โปรดตรวจสอบ การค้นหาต้องมีจำนวน 10 ตัว");
-            return;
-        }
-    }else if (document.getElementById("dropdown").value == "mat_no"){
+    if (search_by == "mat_no"){
         if (search_text.length <= 10){
             
         }else {
@@ -35,7 +26,7 @@ function f_senddata(){
 
     }
 
-    if (search_text == "" ) {
+    if (search_text == null ) {
         alert("โปรดตรวจสอบข้อมูลการค้นหาอีกครั้ง");
         document.getElementById("condition_str").value.textContent = "";
         return;
