@@ -28,13 +28,14 @@ window.onload= function() {
 function postData(mat_no,startdateformat,enddateformat){
 
     jQuery.ajax({
-        url: "https://peahub21.azurewebsites.net/api/v2.0/report/",
+        url: "https://peahub21.azurewebsites.net/api/report/",
         // url: "http://127.0.0.1:8080/api/v2.0/report/",
         //https://hookbin.com/kx6xKbGgjXhepeoxWojw
 
         type: "POST",
         headers: {
             "Content-Type": "application/json",
+            "Authorization": localStorage.getItem("token")
         },
         contentType: "application/json",
         data: JSON.stringify(
