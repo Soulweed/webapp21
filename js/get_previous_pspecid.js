@@ -27,7 +27,8 @@ function postData(sort, text){
         data: JSON.stringify(
             {
                 "search_by": search_by,
-                "search_text": search_text
+                "search_text": search_text,
+                "token": localStorage.getItem("token")
             })
     })
     

@@ -27,6 +27,7 @@ function postData(sort, text){
             {
                 "search_by": search_by,
                 "search_text": search_text,
+
             })
     })
     
