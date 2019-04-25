@@ -15,7 +15,7 @@ function doLogin() {
 
   jQuery.ajax({
 
-      url: "https://peahub21.azurewebsites.net/api/v2.0/login/",
+      url: "https://peahub21.azurewebsites.net/api/login/",
       // url: "http://127.0.0.1:8000/api/v2.0/login/",
       type: "POST",
       headers: {

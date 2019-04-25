@@ -1,3 +1,9 @@
+window.onload = function ()
+{
+  console.log("getlocation")
+  getLocation();
+  console.log(position.coords.latitude,position.coords.position.coords.longitude);
+}
 function doRegister(){
   // Name
   if (document.getElementById("textUsermane").value == "") {
@@ -324,3 +330,4 @@ function selectFunction() {
     return;
   }
 }
+

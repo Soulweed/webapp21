@@ -14,23 +14,22 @@ function postData(sort, text){
 
     jQuery.ajax({
 
-       url: "https://peahub21.azurewebsites.net/api/v2.0/search/",
+       url: "https://peahub21.azurewebsites.net/api/search/",
 
     //    url : "https://hookb.in/ggd1pb80KLsB0B1y81OG", 
        type: "POST",
         headers: {
             "Content-Type": "application/json",
-            
+            "Authorization": localStorage.getItem("token")
         },
         contentType: "application/json",
         data: JSON.stringify(
             {
                 "search_by": search_by,
-                "search_text": search_text
+                "search_text": search_text,
             })
     })
     
-
     .done(function(data, textStatus, jqXHR) {
         console.log("HTTP Request Succeeded: " + jqXHR.status);
         console.log(data); //Return Data

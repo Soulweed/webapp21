@@ -14,12 +14,13 @@ function postData(sort, text){
 
     jQuery.ajax({
 
-       url: "https://peahub21.azurewebsites.net/api/v2.0/search/",
+       url: "https://peahub21.azurewebsites.net/api/search/",
 
     //    url : "https://hookb.in/ggd1pb80KLsB0B1y81OG", 
        type: "POST",
         headers: {
             "Content-Type": "application/json",
+            "Authorization": localStorage.getItem("token")
             
         },
         contentType: "application/json",
