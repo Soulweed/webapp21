@@ -9,10 +9,14 @@
   <link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css" type="text/css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
   <script src="js/register.js" charset="utf-8" type="text/javascript" ></script>
-  
-  
-  
+
+
+
+
+
   <style>
     .map {
 
@@ -81,9 +85,9 @@
     <div class="titleinputusername">
       <div class="inputfield">
       </div>
-      <input class="textusermane" name="textUsermane" id="textUsermane" placeholder="USERMANE" />
+      <input class="textusermane" name="textUsermane" id="textUsermane" placeholder="e-mail" onkeypress="Email_editcheck()"/>
       <div class="username">
-        USERNAME
+        EMAIL ADDRESS
       </div>
     </div>
     <div class="titleinputemail">
@@ -97,7 +101,7 @@
     <div class="titleinputpassword">
       <div class="inputfield">
       </div>
-      <input class="textpassword" name="textPassword" id="textPassword" placeholder="Password" type="password"/>
+      <input class="textpassword" name="textPassword" id="textPassword" placeholder="Password" type="password"/ onkeypress="Email_check()" onclick="Email_check()"/>
       <div class="password">
         PASSWORD
       </div>
@@ -105,7 +109,7 @@
     <div class="titleinputconfirmpassword">
       <div class="inputfield">
       </div>
-      <input class="textconfirmpassword" name="textConfirmPassword" id="textConfirmPassword" placeholder="Confirm password" type="password"/>
+      <input class="textconfirmpassword" name="textConfirmPassword" id="textConfirmPassword" placeholder="Confirm password" type="password" />
       <div class="confirmpassword">
         CONFIRM PASSWORD
       </div>
@@ -124,7 +128,7 @@
     <div class="titleinputcopy4">
       <div class="inputfield">
       </div>
-      <input class="textname" name="textName" id="textName" placeholder="Name" />
+      <input class="textname" name="textName" id="textName" placeholder="Name" onkeypress="Password_comp()" onclick="Password_comp()"/>
       <div class="name">
         NAME
       </div>
@@ -132,7 +136,7 @@
     <div class="titleinputcopy5">
       <div class="inputfield">
       </div>
-      <input class="textlastname" name="textLastname" id="textLastname" placeholder="Lastname" />
+      <input class="textlastname" name="textLastname" id="textLastname" placeholder="Lastname" onkeypress="Name_check()" onclick="Name_check()"/>
       <div class="lastname">
         <span class="span1">LASTNAME</span>
       </div>
@@ -143,7 +147,7 @@
       </div>
       <div class="inputfield" id="CompNameid-body">
       </div>
-      <input class="textxxxxxxxxxxxxx" name="CompName" id="CompNameid-input" placeholder="Company Name" />
+      <input class="textxxxxxxxxxxxxx" name="CompName" id="CompNameid-input" placeholder="Company Name" onkeypress="Lastname_check()" onclick="Lastname_check()"/>
     </div>
     <div class="group4">
       <div class="idcardtaxid">
@@ -152,13 +156,13 @@
         </div>
       </div>
       <div class="inputfield">
-        <input class="textselectCompType" id="idortax" type="text" name="textXxxxxXxxXxXxx=" placeholder="xxxxx-xxx-xx-xxx">
+        <input class="textselectCompType" id="idortax" type="text" name="textXxxxxXxxXxXxx=" placeholder="xxxxx-xxx-xx-xxx" onkeypress="Company_check()" onclick="Company_check()">
       </div>
     </div>
     <!--  -->
     <div class="titleinputcopy7">
       <div class="inputfield" style="color: rgba(50, 60, 71, 1.0);">
-        <input class="phonenumberinput" name="phonenumberinput" id="phonenumberinput" placeholder="Ex: 08xxxxxxxx" />
+        <input class="phonenumberinput" name="phonenumberinput" id="phonenumberinput" placeholder="Ex: 08xxxxxxxx" onkeypress="IdTax_check()" onclick="IdTax_check()"/>
       </div>
       <img anima-src="./img/register-selector-copy@2x.png" class="selectorcopy" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" />
       <div class="a66">
@@ -174,7 +178,7 @@
       </div>
       <div class="inputfield">
       </div>
-      <input class="textxxxxxxxxxxxxx" id="egpid" name="textXxxxxXxxXxXxx" placeholder="xxxxx-xxx-xx-xxx" />
+      <input class="textxxxxxxxxxxxxx" id="egpid" name="textXxxxxXxxXxXxx" placeholder="xxxxx-xxx-xx-xxx" onkeypress="Tel_check()" onclick="Tel_check()"/>
     </div>
     <div class="locationcopy2">
       <div class="companyaddress">
@@ -182,7 +186,7 @@
       </div>
       <div class="inputfield">
       </div>
-      <input class="textcompanyname" id="textcompanyaddress" name="textcompanyaddress" placeholder="Company address" />
+      <input class="textcompanyname" id="textcompanyaddress" name="textcompanyaddress" placeholder="Company address" onkeypress="EGP_check()" onclick="EGP_check()"/>
     </div>
 
     <div class="group3">
@@ -266,25 +270,40 @@
               src: 'https://openlayers.org/en/v5.3.0/examples/data/icon.png'
             }))
           });
+          var vectorLayer = new ol.layer.Vector({
+            source: markerSource,
+            style: markerStyle,
+          });
+          var lon_init;
+          var lat_init;
+          var map_view = new ol.View({
+            center: ol.proj.fromLonLat([102.55742260380217, 13.85022822790503]),
+            zoom: 15,
+          });
+          var geolocation = new ol.Geolocation();
+            geolocation.setTracking(true); // here the browser may ask for confirmation
+            geolocation.on('change:position', function() {
+              lon_init=geolocation.getPosition()[0];
+              lat_init=geolocation.getPosition()[1];
+              console.log(geolocation.getPosition());
+              map.getView().setCenter(ol.proj.fromLonLat([
+                    parseFloat(lon_init), parseFloat(lat_init)
+                  ]));
+            });
 
-          let map = new ol.Map({
+          var map = new ol.Map({
             target: 'map',
             layers: [
               new ol.layer.Tile({
                 source: new ol.source.OSM(),
               }),
-              new ol.layer.Vector({
-                source: markerSource,
-                style: markerStyle,
-              }),
+              vectorLayer,
             ],
-            view: new ol.View({
-              center: ol.proj.fromLonLat([100.5577409, 13.8535583]),
-              zoom: 15,
-            })
+            view: map_view
           });
 
           function addMarker(lon, lat) {
+
             console.log('lon:', lon);
             console.log('lat:', lat);
 
@@ -307,6 +326,10 @@
           }
 
           map.on('singleclick', function(event) {
+            var features = vectorLayer.getSource().getFeatures();
+            features.forEach((feature) => {
+                vectorLayer.getSource().removeFeature(feature);
+            });
             var lonLat = ol.proj.toLonLat(event.coordinate);
             addMarker(lonLat[0], lonLat[1]);
           });
@@ -325,6 +348,7 @@
     </div>
   </div>
   <!-- Scripts -->
+  <script type="text/javascript" src="js/register.js"></script>
   <script>
     anima_isHidden = function(e) {
       if (!(e instanceof HTMLElement)) return !1;

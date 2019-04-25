@@ -28,20 +28,22 @@ window.onload= function() {
 function postData(mat_no,startdateformat,enddateformat){
 
     jQuery.ajax({
-        url: "https://peahub21.azurewebsites.net/api/v2.0/report/",
+        url: "https://peahub21.azurewebsites.net/api/report/",
         // url: "http://127.0.0.1:8080/api/v2.0/report/",
         //https://hookbin.com/kx6xKbGgjXhepeoxWojw
 
         type: "POST",
         headers: {
             "Content-Type": "application/json",
+            "Authorization": localStorage.getItem("token")
         },
         contentType: "application/json",
         data: JSON.stringify(
             {
                 "mat_no": mat_no,
                 "start_date": startdateformat ,
-                "end_date": enddateformat
+                "end_date": enddateformat,
+                "token": localStorage.getItem("token")
             })
     })
     .done(function(data, textStatus, jqXHR) {
@@ -109,12 +111,35 @@ function postData(mat_no,startdateformat,enddateformat){
             console.log(price_max);
             console.log(price_average);
       //////////////////////////Datatable/////////////////
+            var t_body = $('#showresult').DataTable({
+              "retrieve": true,
+              "paging": false,
+              "info": false,
+              columns: [
+                  { title: "Company Name" },
+                  { title: "Price/Unit" },
+                  { title: "Price/Volume" },
+                  { title: "Date" },
+                  { title: "Contact Number" },
+                  { title: "More Detail" }
+              ]
+            });
+            t_body
+                .clear()
+                .draw();
             var list = [];
             // //var i;
             for ( var j= 0; j < price.length; j++) {
 
                 list[j] = [comp_name[j] , price[j] , min[j] , date[j] , comp_tel[j], "<a href=\"" +url[j]+ "\"><buttom>Next</buttom></a>" ];
-
+                t_body.row.add( [
+                    comp_name[j],
+                    price[j],
+                    min[j],
+                    date[j],
+                    comp_tel[j],
+                    "<a href=\"" +url[j]+ "\"><buttom>Next</buttom></a>"
+                ] ).draw( false );
                 //list[j] = [comp_name[j]];
                 }
 
@@ -127,22 +152,24 @@ function postData(mat_no,startdateformat,enddateformat){
     // [ "Brielle Williamson", "Integration Specialist", "New York", 4804, "2012/12/02", 372.000 ]
     //   ];
             console.log(list);
-            $(document).ready(function() {
-            $('#showresult').DataTable( {
-                data: list,
-                "retrieve": true,
-                "paging": false,
-                "info": false,
-                columns: [
-                    { title: "Company Name" },
-                    { title: "Price/Unit" },
-                    { title: "Price/Volume" },
-                    { title: "Date" },
-                    { title: "Contact Number" },
-                    { title: "More Detail" }
-                ]
-            } );
-        } );
+            // $(document).ready(function() {
+            // $('#showresult').DataTable( {
+            //     data: list,
+            //     "retrieve": true,
+            //     "paging": false,
+            //     "info": false,
+            //     columns: [
+            //         { title: "Company Name" },
+            //         { title: "Price/Unit" },
+            //         { title: "Price/Volume" },
+            //         { title: "Date" },
+            //         { title: "Contact Number" },
+            //         { title: "More Detail" }
+            //     ]
+            // } );
+
+        // } );
+
 
       /////////////////////Graph//////////////////
             // var fr = [];
@@ -212,7 +239,7 @@ function postData(mat_no,startdateformat,enddateformat){
         /* ... */
     });
 }
-
+var myChart;
 function plotdata (x, y){
 
     dataG = {
@@ -222,7 +249,8 @@ function plotdata (x, y){
     // ------ //
         console.log(dataG);
         var ctx = document.getElementById('myChart').getContext('2d');
-        var myChart = new Chart(ctx, {
+
+        myChart = new Chart(ctx, {
             type: 'bar',
             data: {
                 labels: dataG.X,
@@ -284,6 +312,7 @@ function Send(){
        }
    }
    console.log(dateend_output);
+   myChart.destroy();
    postData(mat_no,date_output,dateend_output);
 }
 
@@ -313,7 +342,7 @@ function getdateformat_input(date){
       if(month==month_array[i]) {
           var dateformat = date2_split[2]+"/"+month_string[i]+"/"+date2_split[3];
           return dateformat;
-  
+
       }
     }
   }
