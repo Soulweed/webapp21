@@ -53,8 +53,8 @@ function doLogin() {
 }
 
 function f_forgot() {
-console.log("hello forgot");
-console.log(document.getElementById("emailforgot").value);
+// console.log("hello forgot");
+// console.log(document.getElementById("emailforgot").value);
 jQuery.ajax({
   url: "https://peahub21.azurewebsites.net/api/forgetpassword",
   // url: "http://127.0.0.1:8000/api/v2.0/login/",
@@ -62,23 +62,24 @@ jQuery.ajax({
   headers: {
     "Content-Type": "application/json",
   },
-  
   data: JSON.stringify({
     "email": document.getElementById("emailforgot").value
   })
 })
 .done(function(data, textStatus, jqXHR) {
-  console.log("HTTP Request Succeeded: " + jqXHR.status);
-  console.log(data);
+  // console.log("HTTP Request Succeeded: " + jqXHR.status);
+  // console.log(data);
   if (jqXHR.status == 200) {
-      console.log(data['type'])
-      console.log("gggggggg")
-    
-  }
+      // console.log("Succeeded")
+      alert("โปรดตรวจสอบอีเมล์ ระบบได้ส่งรหัสผ่านไปที่อีเมล์แล้ว")
+  }  
 })
 .fail(function(jqXHR, textStatus, errorThrown) {
-  console.log("HTTP Request Failed" + jqXHR.status);
-  console.log(data);
+  // console.log("HTTP Request Failed" + jqXHR.status);
+  if (jqXHR.status == 500) {
+     alert("โปรดตรวจสอบอีกครั้ง ไม่พบอีเมล์ในระบบ ")
+}  
+  
 })
 .always(function() {
   /* ... */
