@@ -8,11 +8,13 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="./js/next_page_csearch.js"></script>
+        <!-- <script src="./js/validate.js"></script> -->
+
+
         <meta content="Launchpad by Anima" name="author">
         </meta>
     </head>
-    <body style="margin: 0;
- background: rgba(249, 250, 251, 1.0);">
+    <body style="margin: 0;background: rgba(249, 250, 251, 1.0);">
         <input id="anPageName" name="page" type="hidden" value="p11searchp"/>
         <div class="p11searchp">
             <div style="width: 1440px; height: 100%; position:relative; margin:auto;">
@@ -61,8 +63,8 @@
                 </div>
                 <div class="group4copy">
                         <div class="group5copy3">
-                                <input class="textquery" id="condition_str" name="condition_str" onkeypress="f_validate()" placeholder="Type Condition">
-                            </div>
+                                <input class="textquery" id="condition_str" name="condition_str" onkeypress="f_validate(event)" placeholder="Type Condition">
+                        </div>
                             <div class="search">
                                 SEARCH
                             </div>
@@ -263,6 +265,5 @@
             }, 250);
         </script>
         <!-- End of Scripts -->
-
     </body>
 </html>

@@ -154,7 +154,6 @@ function convertToBase64() {
     };
     // Convert data to base64
     fileReader.readAsDataURL(fileToLoad);
-
   } else {
     alert("Please attach qaotation.");
   }
@@ -167,7 +166,6 @@ function confirmoffer() {
     alert("Please enter the material unit price.");
     return;
   }
-
   if (document.getElementById("textVolume").value == "") {
     alert("Please enter minimun of material offer value.");
     return;
@@ -177,7 +175,6 @@ function confirmoffer() {
   var mat_no_string = document.getElementById("mat_no").textContent;
   var mat_no = mat_no_string.split("Material ID: ")[1];
   console.log(localStorage.getItem("comp_id"));
-
   jQuery.ajax({
     url: "https://peahub21.azurewebsites.net/api/v2.0/offer/",
     // url: "https://peahub21.azurewebsites.net/api/v2.0/offer/",
@@ -192,7 +189,8 @@ function confirmoffer() {
         "price" : document.getElementById("textPriceUnit").value,
         "quo_upload_file" : base64updte,
         "min_vol" : document.getElementById("textVolume").value,
-        "mat_no" : mat_no
+        "mat_no" : mat_no,
+        "token": localStorage.getItem("token")
       }
     )
   })
@@ -212,8 +210,6 @@ function confirmoffer() {
   .always(function() {
       /* ... */
   });
-
-
 }
 
 function deletePDF() {
@@ -231,7 +227,6 @@ function offer_next_page() {
 
 // TODO
 function get_response_offer(data) {
-
   // collect variable to var before save to localStorage
   var spec_id = obj['spec_id'];
   var mat_no = obj['mat_no'];
@@ -263,8 +258,7 @@ function next_page(){
   var min_vol = document.getElementById("textVolume").value;
   var send_date_def = new Date();
   var send_date = getdateformat(send_date_def);
-  var send_time = gettimeformat(send_date_def)
-
+  var send_time = gettimeformat(send_date_def);
   var queryString = "?" + spec_id + "&para" + mat_no + "&para" + mat_desc + "&para" + unit_price + "&para" + min_vol + "&para" + send_date + "&para" + send_time;
   console.log(queryString);
   window.location.href = "c11finalcopy.html" + queryString;
