@@ -7,11 +7,45 @@
         <link href="./css/login.css" rel="stylesheet" type="text/css"/>
         <meta content="Launchpad by Anima" name="author">
         </meta>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="js/login.js" charset="utf-8" type="text/javascript"></script>
     </head>
     <body style="margin: 0;
  background: rgba(255, 255, 255, 1.0);">
+ <div class="modal" id="myModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+          
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">โปรดกรอกอีเมล์ของท่าน:</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            
+            <!-- Modal body -->
+            <div class="modal-body">
+                    <div class="input-group flex-nowrap">
+                        <div class="input-group-prepend">
+                        <span class="input-group-text" id="addon-wrapping">Email:</span>
+                        </div>
+                        <input id="emailforgot" type="text" class="form-control" placeholder="โปรดกรอกอีเมล์ของท่าน" aria-label="Username" aria-describedby="addon-wrapping">
+                    </div>
+            </div>
+            
+            <!-- Modal footer -->
+            <div class="modal-footer">
+            <button type="button" class="btn btn-warning" data-dismiss="modal" onclick = "f_forgot()">ตกลง</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+            </div>
+            
+          </div>
+        </div>
+    </div>
+    
         <input id="anPageName" name="page" type="hidden" value="login"/>
         <div class="login">
             <div style="width: 1440px; height: 100%; position:relative; margin:auto;">
@@ -20,7 +54,6 @@
                 </div>
                 <div class="group">
                     <div class="header">
-                        
                         <div class="home">
                             Home
                         </div>
@@ -45,16 +78,16 @@
                             </div>
                         </a>
                     </div>
-                    <img anima-src="./img/c-1-1-search---c-dropdown-path-8.png" class="path8" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                <img anima-src="./img/c-1-1-search---c-dropdown-path-8.png" class="path8" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
                 </div>
-                <div class="group7">
+            <div class="group7">
                     <img anima-src="./img/login-rectangle.png" class="rectangle" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
                     <div class="group5">
                         <div anima-show-on-scroll="" class="buttonlogin anima-animate-enter7">
                             <button anima-show-on-scroll="" class="button anima-animate-enter6" onclick="doLogin()">
                                 <div class="rectangle10">
                                 </div>
-                                <div class="login1" type="button">
+                                <div class="login1">
                                     LOGIN
                                 </div>
                             </button>
@@ -64,7 +97,7 @@
                                 <div class="rectangle34">
                                 </div>
                                 <input class="textpassword" id="password" name="textPassword" type="password" placeholder="Password"/>
-                                <div class="forgot">
+                                <div class="forgot" type="button" data-toggle="modal" data-target="#myModal" >
                                     Forgot?
                                 </div>
                                 <div class="ionioslockedoutlineionicons">
