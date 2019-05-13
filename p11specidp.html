@@ -6,7 +6,9 @@
         <meta content="width=1440, maximum-scale=1.0" name="viewport"/>
         <link href="./css/p11SpecIdP.css" rel="stylesheet" type="text/css"/>
         <meta content="Launchpad by Anima" name="author">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
         <script src="./js/get_previous_pspecid.js"></script>
         <!-- <script src="./js/search_item.js"></script> -->
         <script src="./js/validate.js"></script>
@@ -24,7 +26,7 @@
                     <div class="footer">
                         <div class="bg">
                         </div>
-                        <div class="pagination">
+                        <!-- <div class="pagination">
                             <div class="next">
                                 <img anima-src="./img/p-1-1-material-id-copy-4-bg@2x.png" class="bg1" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
                                 <div class="polarisiconminormonoarrowright">
@@ -37,7 +39,7 @@
                                     <img anima-src="./img/c-1-1-spec-id---c-copy-polaris-iconminormonoarrow-right-1@2x.png" class="polarisiconminormonoarrowright1" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="header">
                         <div class="row5">
@@ -68,7 +70,10 @@
                             </div>
                         </div>
                     </div>
-                    <div id="search_result"></div>
+                    <div class="linegreykeyword">
+                        <div id="loader"></div>
+                        <table id="showresult" class="display" style="width:100%"></table>
+                    </div>
                     <img anima-src="./img/p-1-1-spec-id---p-separate.png" class="separate" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
                     <div class="affichagetri">
                         <div class="background">
@@ -122,7 +127,7 @@
                             SEARCH
                         </div>
                     </div> -->
-                    <button type="button" class="buttonnext button:hover" id="next_0" onclick="f_senddata()">
+                    <button type="button" class="buttonnext button:hover" onclick="f_senddata()">
                             <div class="next">SEARCH</div>
                         </button>
                 </div>

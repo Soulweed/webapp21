@@ -12,23 +12,27 @@ function postData(sort, text){
     let search_by = sort;
     let search_text = text;
     var token = "Token " + localStorage.getItem("token");
-    jQuery.ajax({
 
-       url: "https://peahub21.azurewebsites.net/api/search/",
+
+
+    jQuery.ajax({
+      
+        url: "https://peahub21.azurewebsites.net/api/search/",
 
     //    url : "https://hookb.in/ggd1pb80KLsB0B1y81OG",
        type: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": token,
 
-        },
+       headers: {
+        "Authorization": token,
+        "Content-Type": "application/json",
+        
+    },
+
         contentType: "application/json",
         data: JSON.stringify(
             {
                 "search_by": search_by,
-                "search_text": search_text,
-                "token": localStorage.getItem("token")
+                "search_text": search_text
             })
     })
 
@@ -44,16 +48,13 @@ function postData(sort, text){
             var data_json = JSON.stringify(obj);
             localStorage.setItem("search_result", data_json);
             var i;
-            let html_result = '';
+            var list = [];
+            let next_button = '';
+            var spec_id_td = '';
+            var mat_no_td = '';
             let div_end = '</div>';
-            let grey_table = '<div class=\"linegreykeyword\">';
-            let white_table = '<div class=\"linewhitekeyword\">';
-            let tablecontainer = '<div class=\"tablelinecontainer\"></div>';
             let statutencours = '<div class=\"statutencours\">';
             let statutencours1 = '<div class=\"statutencours1\">';
-            let tablecelcopy = '<div class=\"tablecelcopy\">';
-            let tablecelcopy1 = '<div class=\"tablecelcopy1\">';
-            let background = '<div class=\"background\"></div>';
             let fond = '<div class=\"fond\"></div>';
             let lable = '<div class=\"label\">';
             let lable_mat = '<div class=\"label\">';
@@ -62,22 +63,31 @@ function postData(sort, text){
             let onclick = 'onclick=\"next_page(this.id)\">';
             let next = '<div class=\"next\">NEXT</div></botton>' + div_end;
             let id = '';
-
+            
             for (i in obj){
-                if (i%2==0){
-                    html_result += grey_table + tablecontainer;
-                }
-                else{
-                    html_result += white_table + tablecontainer;
-                }
                 id = 'id=\"next_' + i + '\"';
-                html_result += statutencours1 + fond + lable + obj[i].spec_id + div_end + div_end;
-                html_result += statutencours + fond + lable_mat + obj[i].mat_no + div_end + div_end;
-                html_result += tablecelcopy + background + tablecelcopy1 + lable + obj[i].mat_desc + div_end + div_end + div_end;
-                html_result += button + button_class + id + onclick + next;
+                spec_id_td = statutencours1 + fond + lable + obj[i].spec_id + div_end + div_end;
+                mat_no_td = statutencours + fond + lable_mat + obj[i].mat_no + div_end + div_end;
+                next_button = button + button_class + id + onclick + next;
+                list[i] = [spec_id_td, mat_no_td, obj[i].mat_desc, next_button];
             }
-            document.getElementById('search_result').innerHTML = html_result;
 
+            $(document).ready(function() {
+                $('#showresult').DataTable( {
+                    data: list,
+                    "lengthChange": false,
+                    "searching": false,
+                    "info": false,
+                    "pagingType": "simple",
+                    "pageLength": 11,
+                    "columns": [
+                        { "width": "13%" },
+                        { "width": "13%" },
+                        { "width": "50%" },
+                        { "width": "10%" }
+                      ]
+                } );
+            } );
 
 
 
