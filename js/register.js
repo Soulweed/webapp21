@@ -102,6 +102,7 @@ function doRegister(){
     if (typeof(lon_select)!='number' || typeof(lat_select)!='number')
     {
       alert('Please select your location');
+      return 0;
     }
 
 

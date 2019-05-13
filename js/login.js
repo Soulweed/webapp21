@@ -27,34 +27,6 @@ function doLogin() {
         "password": document.getElementById("password").value
       })
     })
-
-    // .done(function(data, textStatus, jqXHR) {
-    //   alert("Login Success. Welcome to PEA Medium Prices.");
-    //   console.log("HTTP Request Succeeded: " + jqXHR.status);
-    //   console.log(data); //Return Data
-    //   if (jqXHR.status == 200) {
-    //     console.log(data)
-    //     if (jqXHR.type == "1" || jqXHR.type == "2") {
-    //       location.replace("c11searchc.html")
-    //     }
-    //     else if (jqXHR.type == 3) {
-    //       location.replace("p11searchp.html")
-    //     }
-    //     else
-    //     location.replace("login.html")
-    //     //window.location = "p11searchp.html"
-    //     // location.replace("p11searchp.html")
-    //   }
-    // })
-    // .fail(function(jqXHR, textStatus, errorThrown) {
-    //   console.log("HTTP Request Failed");
-    //   console.log(data);
-    //   alert("HTTP Request Failed");
-
-    // })
-    // .always(function() {
-    //   /* ... */
-    // });
     .done(function(data, textStatus, jqXHR) {
       console.log("HTTP Request Succeeded: " + jqXHR.status);
       console.log(data);
@@ -79,3 +51,40 @@ function doLogin() {
       /* ... */
   });
 }
+
+function f_forgot() {
+// console.log("hello forgot");
+// console.log(document.getElementById("emailforgot").value);
+jQuery.ajax({
+  url: "https://peahub21.azurewebsites.net/api/forgetpassword",
+  // url: "http://127.0.0.1:8000/api/v2.0/login/",
+  type: "PUT",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  data: JSON.stringify({
+    "email": document.getElementById("emailforgot").value
+  })
+})
+.done(function(data, textStatus, jqXHR) {
+  // console.log("HTTP Request Succeeded: " + jqXHR.status);
+  // console.log(data);
+  if (jqXHR.status == 200) {
+      // console.log("Succeeded")
+      alert("โปรดตรวจสอบอีเมล์ ระบบได้ส่งรหัสผ่านไปที่อีเมล์แล้ว")
+  }  
+})
+.fail(function(jqXHR, textStatus, errorThrown) {
+  // console.log("HTTP Request Failed" + jqXHR.status);
+  if (jqXHR.status == 500) {
+     alert("โปรดตรวจสอบอีกครั้ง ไม่พบอีเมล์ในระบบ ")
+}  
+  
+})
+.always(function() {
+  /* ... */
+});
+}
+
+
+

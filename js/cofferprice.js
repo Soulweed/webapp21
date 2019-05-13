@@ -175,13 +175,15 @@ function confirmoffer() {
   var mat_no_string = document.getElementById("mat_no").textContent;
   var mat_no = mat_no_string.split("Material ID: ")[1];
   console.log(localStorage.getItem("comp_id"));
+  var token = "Token " + localStorage.getItem("token");
   jQuery.ajax({
-    url: "https://peahub21.azurewebsites.net/api/v2.0/offer/",
+    url: "https://peahub21.azurewebsites.net/api/offer/",
     // url: "https://peahub21.azurewebsites.net/api/v2.0/offer/",
     // url: "http://192.168.43.175:8000/api/ball/testpdf/",
     type: "POST",
     headers: {
       "Content-Type": "application/json",
+      "Authorization": token,
     },
     data: JSON.stringify(
       {
@@ -285,4 +287,3 @@ function gettimeformat(date){
   var time = date2_split[4];
   return time;
 }
-
