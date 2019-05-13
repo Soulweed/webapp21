@@ -11,17 +11,17 @@ localStorage.setItem("search_text", search_text);
 function postData(sort, text){
     let search_by = sort;
     let search_text = text;
-
+    var token = "Token " + localStorage.getItem("token");
     jQuery.ajax({
 
        url: "https://peahub21.azurewebsites.net/api/search/",
 
-    //    url : "https://hookb.in/ggd1pb80KLsB0B1y81OG", 
+    //    url : "https://hookb.in/ggd1pb80KLsB0B1y81OG",
        type: "POST",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": localStorage.getItem("token")
-            
+            "Authorization": token,
+
         },
         contentType: "application/json",
         data: JSON.stringify(
@@ -31,13 +31,13 @@ function postData(sort, text){
                 "token": localStorage.getItem("token")
             })
     })
-    
+
     .done(function(data, textStatus, jqXHR) {
         console.log("HTTP Request Succeeded: " + jqXHR.status);
         console.log(data); //Return Data
         if (jqXHR.status == 200) {
             console.log(data)
-            
+
             console.log(data['result'])
             // window.localStorage.setItem('datasearch',JSON.stringify(data));
             var obj = data['result'];
@@ -89,7 +89,7 @@ function postData(sort, text){
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
         console.log("HTTP Request Failed");
-        
+
     })
     .always(function() {
         /* ... */

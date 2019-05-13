@@ -26,11 +26,11 @@ function f_senddata(){
         return;
     } else {
         var queryString = "?" + search_by + "&para" + search_text;
-        window.location.href = "c11specid.html" + queryString;
+        window.location.href = "p11specidp.html" + queryString;
         console.log(queryString);
       }
 }
-function f_validate(val) { // เช็คตัวเลข
+function f_validate(val){ // เช็คตัวเลข
     if (document.getElementById("dropdown").value == "mat_no")
     {
         if (val.keyCode < 48 || val.keyCode > 57) {
@@ -40,6 +40,4 @@ function f_validate(val) { // เช็คตัวเลข
             }
     }
 
-
 }
-
