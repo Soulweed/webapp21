@@ -54,7 +54,7 @@
                 </div>
                 <div class="group">
                     <div class="header">
-                        <div class="home">
+                        <!-- <div class="home">
                             Home
                         </div>
                         <div class="search">
@@ -69,7 +69,7 @@
                             <div class="getstartednow">
                                 Log in/Sign up
                             </div>
-                        </div>
+                        </div> -->
                         <a href="homepage.html">
                             <div class="logo">
                                 <div class="peamediumprice">
@@ -84,7 +84,7 @@
                     <img anima-src="./img/login-rectangle.png" class="rectangle" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
                     <div class="group5">
                         <div anima-show-on-scroll="" class="buttonlogin anima-animate-enter7">
-                            <button anima-show-on-scroll="" class="button anima-animate-enter6" onclick="doLogin()">
+                            <button anima-show-on-scroll="" class="button anima-animate-enter6" id = "login_click" onclick="doLogin()">
                                 <div class="rectangle10">
                                 </div>
                                 <div class="login1">
@@ -92,7 +92,7 @@
                                 </div>
                             </button>
                         </div>
-                        <form class="form">
+                        <form class="form" method="POST">
                             <div class="password">
                                 <div class="rectangle34">
                                 </div>
@@ -121,10 +121,11 @@
                                     </div>
                                 </div>
                             </div>
+                            
                         </form>
                         <div class="illustration">
                             <!-- <a href="c11searchc.html"> -->
-                                <div anima-show-on-scroll="" class="volunteer anima-animate-enter8">
+                                <!-- <div anima-show-on-scroll="" class="volunteer anima-animate-enter8">
                                     <div class="rectanglecopy">
                                     </div>
                                     <div class="company">
@@ -184,7 +185,7 @@
                                             <img anima-src="./img/login-path-109-copy-2@2x.png" class="path109copy2" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             <!-- </a> -->
                             <!-- <a href="p11searchp.html"> -->
                                 <div anima-show-on-scroll="" class="medical anima-animate-enter9">
@@ -241,9 +242,9 @@
                                             <img anima-src="./img/login-path-109-copy-2-1@2x.png" class="path109copy2" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
                                         </div>
                                     </div>
-                                    <div class="government">
+                                    <!-- <div class="government">
                                         Government
-                                    </div>
+                                    </div> -->
                                 </div>
                             <!-- </a> -->
                         </div>
@@ -263,6 +264,22 @@
             </div>
         </div>
         <!-- Scripts -->
+        <script>
+            var username = document.getElementById("username");
+            username.addEventListener("keyup", function(event) {
+            if (event.keyCode === 13) {
+            event.preventDefault();
+            document.getElementById("login_click").click();
+            }
+            });
+            var password = document.getElementById("password");
+            password.addEventListener("keyup", function(event) {
+            if (event.keyCode === 13) {
+            event.preventDefault();
+            document.getElementById("login_click").click();
+            }
+            });
+        </script>
         <script>
             anima_isHidden = function(e) {
                 if (!(e instanceof HTMLElement)) return !1;

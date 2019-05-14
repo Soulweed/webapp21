@@ -559,7 +559,7 @@ div {
   width               : 143px;
   position            : relative;
   margin              : 0;
-  left                : 0px;
+  left                : -5px;
   -ms-transform       : rotate(0deg); /* IE 9 */
   -webkit-transform   : rotate(0deg); /* Chrome, Safari, Opera */
   transform           : rotate(0deg);
@@ -1385,7 +1385,7 @@ div {
   width               : 123px;
   position            : absolute;
   margin              : 0;
-  left                : 3px;
+  left                : 160px;
   -ms-transform       : rotate(0deg); /* IE 9 */
   -webkit-transform   : rotate(0deg); /* Chrome, Safari, Opera */
   transform           : rotate(0deg);
@@ -1412,7 +1412,7 @@ div {
   top                 : 12px;
   height              : 81px;
   width               : 67px;
-  position            : absolute;
+  position            : relative;
   margin              : 0;
   left                : 28px;
   -ms-transform       : rotate(0deg); /* IE 9 */
